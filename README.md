@@ -20,8 +20,10 @@ This workflow example, built on System Composer, reconstructs an EV traction e-m
 
 ## Setup Instructions
 Clone the repository:
-
-
+- On GitHub, navigate to the repository you want to clone.
+- Click the green "Code" button and copy the HTTPS
+- In MATLAB, right-click in the Files or Project panel.
+- Select Source Control > Clone Git Repository.
 
 ## Relevant Products (Release R2025b and later)
 
