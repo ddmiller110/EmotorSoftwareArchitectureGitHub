@@ -1,0 +1,408 @@
+{
+  "SimulinkVersion": "11.4",
+  "Options": [
+    {
+      "name": "Version",
+      "description": "Please don't manually edit this file.",
+      "value": "1.0"
+    },
+    {
+      "name": "SuppressWarnOnMALoadConfigMissCorrespondCheck",
+      "description": "Suppress warning message for missing checks when loading configuration.",
+      "value": false
+    },
+    {
+      "name": "overrideSLDVTimeoutCB",
+      "description": "Override Simulink Design Verifier analysis time-out",
+      "value": false
+    },
+    {
+      "name": "SLDVTimeOut",
+      "description": "Analysis Time-out",
+      "value": "300"
+    }
+  ],
+  "Tree": [
+    {
+      "id": "_SYSTEM",
+      "label": "Model Advisor Configuration Editor",
+      "enable": true,
+      "CSHParameters": [],
+      "helpPath": "",
+      "oldid": "",
+      "oldparent": "",
+      "InputParametersCallback": false,
+      "InputParametersLayoutGrid_row": 0,
+      "InputParametersLayoutGrid_col": 0,
+      "description": "",
+      "InputParameters": [],
+      "originalnodeid": "_SYSTEM",
+      "Severity": "",
+      "EdittimeClassname": "",
+      "ConstraintXML": "",
+      "check": false,
+      "iscompile": false,
+      "isedittime": false,
+      "isblockconstraint": false,
+      "checkid": null,
+      "searchdata": "Model Advisor Configuration Editor ",
+      "iconUri": "/toolbox/simulink/simulink/modeladvisor/resources/folder_16.png",
+      "runStatus": "notRun",
+      "parent": null
+    },
+    {
+      "id": "_SYSTEM_By Task",
+      "label": "By Task",
+      "enable": true,
+      "CSHParameters": {
+        "MapKey": "ma.simulink",
+        "TopicID": "by_task_overview"
+      },
+      "helpPath": "",
+      "oldid": "",
+      "oldparent": "",
+      "InputParametersCallback": false,
+      "InputParametersLayoutGrid_row": 0,
+      "InputParametersLayoutGrid_col": 0,
+      "description": "",
+      "InputParameters": [],
+      "originalnodeid": "_SYSTEM_By Task",
+      "Severity": "",
+      "EdittimeClassname": "",
+      "ConstraintXML": "",
+      "check": true,
+      "iscompile": false,
+      "isedittime": false,
+      "isblockconstraint": false,
+      "checkid": null,
+      "searchdata": "By Task ",
+      "iconUri": "/toolbox/simulink/simulink/modeladvisor/resources/folder_16.png",
+      "runStatus": "notRun",
+      "parent": "_SYSTEM"
+    },
+    {
+      "id": "_SYSTEM_By Task_maab",
+      "label": "Modeling Standards for MAB",
+      "enable": true,
+      "CSHParameters": {
+        "MapKey": "ma.mw.jmaab",
+        "TopicID": "mab_overview"
+      },
+      "helpPath": "",
+      "oldid": "",
+      "oldparent": "",
+      "InputParametersCallback": false,
+      "InputParametersLayoutGrid_row": 0,
+      "InputParametersLayoutGrid_col": 0,
+      "description": "Group of MAB checks",
+      "InputParameters": [],
+      "originalnodeid": "_SYSTEM_By Task_maab",
+      "Severity": "",
+      "EdittimeClassname": "",
+      "ConstraintXML": "",
+      "check": true,
+      "iscompile": false,
+      "isedittime": false,
+      "isblockconstraint": false,
+      "checkid": null,
+      "searchdata": "Modeling Standards for MAB Group of MAB checks",
+      "iconUri": "/toolbox/simulink/simulink/modeladvisor/resources/folder_16.png",
+      "runStatus": "notRun",
+      "parent": "_SYSTEM_By Task"
+    },
+    {
+      "id": "_SYSTEM_By Task_MAB Simulink",
+      "label": "Simulink",
+      "enable": true,
+      "CSHParameters": {
+        "MapKey": "ma.mw.jmaab",
+        "TopicID": "mab_simulink_overview"
+      },
+      "helpPath": "",
+      "oldid": "",
+      "oldparent": "",
+      "InputParametersCallback": false,
+      "InputParametersLayoutGrid_row": 0,
+      "InputParametersLayoutGrid_col": 0,
+      "description": "Simulink related MAB checks",
+      "InputParameters": [],
+      "originalnodeid": "_SYSTEM_By Task_MAB Simulink",
+      "Severity": "",
+      "EdittimeClassname": "",
+      "ConstraintXML": "",
+      "check": true,
+      "iscompile": false,
+      "isedittime": false,
+      "isblockconstraint": false,
+      "checkid": null,
+      "searchdata": "Simulink Simulink related MAB checks",
+      "iconUri": "/toolbox/simulink/simulink/modeladvisor/resources/folder_16.png",
+      "runStatus": "notRun",
+      "parent": "_SYSTEM_By Task_maab"
+    },
+    {
+      "id": "_SYSTEM_By Task_MAB Simulink_mathworks.jmaab.db_0042",
+      "label": "Check position of Inport and Outport blocks",
+      "enable": true,
+      "CSHParameters": {
+        "MapKey": "ma.mw.jmaab",
+        "TopicID": "mathworks.jmaab.db_0042"
+      },
+      "helpPath": "",
+      "oldid": "_SYSTEM_By Task_MAB Simulink Other Blocks_mathworks.jmaab.db_0042",
+      "oldparent": "_SYSTEM_By Task_MAB Simulink Other Blocks",
+      "InputParametersCallback": true,
+      "InputParametersLayoutGrid_row": 0,
+      "InputParametersLayoutGrid_col": 0,
+      "description": "db_0042: Usage of Inport and Outport blocks\n\nIdentify inappropriately placed Inport and Outport blocks.",
+      "InputParameters": [
+        {
+          "name": "db_0042_a: Check positions of Inport blocks",
+          "index": 1,
+          "type": "Bool",
+          "visible": false,
+          "entries": [],
+          "value": true,
+          "rowspan1": 1,
+          "rowspan2": 1,
+          "colspan1": 1,
+          "colspan2": 4,
+          "isenable": true
+        },
+        {
+          "name": "db_0042_b: Check positions of Outport blocks",
+          "index": 2,
+          "type": "Bool",
+          "visible": false,
+          "entries": [],
+          "value": true,
+          "rowspan1": 2,
+          "rowspan2": 2,
+          "colspan1": 1,
+          "colspan2": 4,
+          "isenable": true
+        },
+        {
+          "name": "db_0042_c: Check usage of duplicate Inport blocks",
+          "index": 3,
+          "type": "Bool",
+          "visible": false,
+          "entries": [],
+          "value": true,
+          "rowspan1": 3,
+          "rowspan2": 3,
+          "colspan1": 1,
+          "colspan2": 4,
+          "isenable": true
+        },
+        {
+          "name": "Follow links",
+          "index": 4,
+          "type": "Enum",
+          "visible": false,
+          "entries": [
+            "on",
+            "off"
+          ],
+          "value": "on",
+          "rowspan1": 4,
+          "rowspan2": 4,
+          "colspan1": 1,
+          "colspan2": 2,
+          "isenable": true
+        },
+        {
+          "name": "Look under masks",
+          "index": 5,
+          "type": "Enum",
+          "visible": false,
+          "entries": [
+            "none",
+            "graphical",
+            "functional",
+            "all"
+          ],
+          "value": "graphical",
+          "rowspan1": 4,
+          "rowspan2": 4,
+          "colspan1": 3,
+          "colspan2": 4,
+          "isenable": true
+        }
+      ],
+      "originalnodeid": "_SYSTEM_By Task_MAB Simulink Other Blocks_mathworks.jmaab.db_0042",
+      "Severity": "Optional",
+      "EdittimeClassname": "",
+      "ConstraintXML": "",
+      "check": true,
+      "iscompile": false,
+      "isedittime": false,
+      "isblockconstraint": false,
+      "checkid": "mathworks.jmaab.db_0042",
+      "searchdata": "Check position of Inport and Outport blocks mathworks.jmaab.db_0042 db_0042: Usage of Inport and Outport blocks\n\nIdentify inappropriately placed Inport and Outport blocks.",
+      "iconUri": "/toolbox/simulink/simulink/modeladvisor/private/no_compile_16.png",
+      "runStatus": "notRun",
+      "parent": "_SYSTEM_By Task_MAB Simulink"
+    },
+    {
+      "id": "_SYSTEM_By Task_MAB Simulink_mathworks.maab.jc_0081",
+      "label": "Check display for port blocks",
+      "enable": true,
+      "CSHParameters": {
+        "MapKey": "ma.mw.jmaab",
+        "TopicID": "jc0081Title"
+      },
+      "helpPath": "",
+      "oldid": "_SYSTEM_By Task_MAB Simulink Other Blocks_mathworks.maab.jc_0081",
+      "oldparent": "_SYSTEM_By Task_MAB Simulink Other Blocks",
+      "InputParametersCallback": false,
+      "InputParametersLayoutGrid_row": 0,
+      "InputParametersLayoutGrid_col": 0,
+      "description": "jc_0081: Inport and Outport block icon display\n\nIdentify Inport and Outport blocks that do not specify Port number for the Icon display block parameter.",
+      "InputParameters": [
+        {
+          "name": "Follow links",
+          "index": 1,
+          "type": "Enum",
+          "visible": false,
+          "entries": [
+            "on",
+            "off"
+          ],
+          "value": "on",
+          "rowspan1": 1,
+          "rowspan2": 1,
+          "colspan1": 1,
+          "colspan2": 2,
+          "isenable": true
+        },
+        {
+          "name": "Look under masks",
+          "index": 2,
+          "type": "Enum",
+          "visible": false,
+          "entries": [
+            "none",
+            "graphical",
+            "functional",
+            "all"
+          ],
+          "value": "graphical",
+          "rowspan1": 1,
+          "rowspan2": 1,
+          "colspan1": 4,
+          "colspan2": 5,
+          "isenable": true
+        }
+      ],
+      "originalnodeid": "_SYSTEM_By Task_MAB Simulink Other Blocks_mathworks.maab.jc_0081",
+      "Severity": "Optional",
+      "EdittimeClassname": "",
+      "ConstraintXML": "",
+      "check": true,
+      "iscompile": false,
+      "isedittime": true,
+      "isblockconstraint": false,
+      "checkid": "mathworks.maab.jc_0081",
+      "searchdata": "Check display for port blocks mathworks.maab.jc_0081 jc_0081: Inport and Outport block icon display\n\nIdentify Inport and Outport blocks that do not specify Port number for the Icon display block parameter. @edit_time_supported_check",
+      "iconUri": "/toolbox/simulink/simulink/modeladvisor/private/no_compile_16.png",
+      "runStatus": "notRun",
+      "parent": "_SYSTEM_By Task_MAB Simulink"
+    },
+    {
+      "id": "_SYSTEM_By Task_MAB Simulink_mathworks.maab.jc_0011",
+      "label": "Check Implement logic signals as Boolean data (vs. double)",
+      "enable": true,
+      "CSHParameters": {
+        "MapKey": "ma.mw.jmaab",
+        "TopicID": "jc0011Title"
+      },
+      "helpPath": "",
+      "oldid": "_SYSTEM_By Task_MAB Simulink Configuration Parameters_mathworks.maab.jc_0011",
+      "oldparent": "_SYSTEM_By Task_MAB Simulink Configuration Parameters",
+      "InputParametersCallback": false,
+      "InputParametersLayoutGrid_row": 0,
+      "InputParametersLayoutGrid_col": 0,
+      "description": "jc_0011: Optimization parameters for Boolean data types<br/><br/>Identify logic signals used as Boolean data type.",
+      "InputParameters": [],
+      "originalnodeid": "_SYSTEM_By Task_MAB Simulink Configuration Parameters_mathworks.maab.jc_0011",
+      "Severity": "Optional",
+      "EdittimeClassname": "",
+      "ConstraintXML": "",
+      "check": true,
+      "iscompile": false,
+      "isedittime": false,
+      "isblockconstraint": false,
+      "checkid": "mathworks.maab.jc_0011",
+      "searchdata": "Check Implement logic signals as Boolean data (vs. double) mathworks.maab.jc_0011 jc_0011: Optimization parameters for Boolean data types<br/><br/>Identify logic signals used as Boolean data type.",
+      "iconUri": "/toolbox/simulink/simulink/modeladvisor/private/no_compile_16.png",
+      "runStatus": "notRun",
+      "parent": "_SYSTEM_By Task_MAB Simulink"
+    },
+    {
+      "id": "_SYSTEM_By Task_MAB Simulink_mathworks.jmaab.jc_0110",
+      "label": "Check block orientation",
+      "enable": true,
+      "CSHParameters": {
+        "MapKey": "ma.mw.jmaab",
+        "TopicID": "mathworks.jmaab.jc_0110"
+      },
+      "helpPath": "",
+      "oldid": "_SYSTEM_By Task_MAB Simulink Block Consistency_mathworks.jmaab.jc_0110",
+      "oldparent": "_SYSTEM_By Task_MAB Simulink Block Consistency",
+      "InputParametersCallback": false,
+      "InputParametersLayoutGrid_row": 0,
+      "InputParametersLayoutGrid_col": 0,
+      "description": "jc_0110: Direction of block\n\nIdentify blocks which are rotated or reversed.",
+      "InputParameters": [
+        {
+          "name": "Follow links",
+          "index": 1,
+          "type": "Enum",
+          "visible": false,
+          "entries": [
+            "on",
+            "off"
+          ],
+          "value": "on",
+          "rowspan1": 1,
+          "rowspan2": 1,
+          "colspan1": 1,
+          "colspan2": 2,
+          "isenable": true
+        },
+        {
+          "name": "Look under masks",
+          "index": 2,
+          "type": "Enum",
+          "visible": false,
+          "entries": [
+            "none",
+            "graphical",
+            "functional",
+            "all"
+          ],
+          "value": "graphical",
+          "rowspan1": 1,
+          "rowspan2": 1,
+          "colspan1": 3,
+          "colspan2": 4,
+          "isenable": true
+        }
+      ],
+      "originalnodeid": "_SYSTEM_By Task_MAB Simulink Block Consistency_mathworks.jmaab.jc_0110",
+      "Severity": "Optional",
+      "EdittimeClassname": "",
+      "ConstraintXML": "",
+      "check": true,
+      "iscompile": false,
+      "isedittime": true,
+      "isblockconstraint": false,
+      "checkid": "mathworks.jmaab.jc_0110",
+      "searchdata": "Check block orientation mathworks.jmaab.jc_0110 jc_0110: Direction of block\n\nIdentify blocks which are rotated or reversed. @edit_time_supported_check",
+      "iconUri": "/toolbox/simulink/simulink/modeladvisor/private/no_compile_16.png",
+      "runStatus": "notRun",
+      "parent": "_SYSTEM_By Task_MAB Simulink"
+    }
+  ]
+}
