@@ -141,6 +141,7 @@ jobs:
             Simulink_Design_Verifier
             Powertrain_Blockset
             Simulink_Report_Generator
+            Simulink_Control_Design
           cache: true
           release: R2025b  
 
