@@ -1,0 +1,195 @@
+name:
+  EMotorSoftwareMBD Pipeline
+
+on:
+  # workflow_dispatch:
+  # Triggers the workflow on push events but only for the main branch
+  push:
+    branches: [ master ]
+
+permissions:
+  checks:
+    write
+
+  contents:
+    read
+
+
+env:
+  PATH_TO_MATLAB:
+    /opt/matlab/R2025b
+
+
+jobs:
+  Restore_Cache:
+    runs-on:
+      ubuntu-latest
+
+    steps:
+      - name:
+          Checkout Repository
+
+        uses:
+          actions/checkout@v4
+
+      - name:
+          Restore Cache
+
+        uses:
+          actions/cache@v4
+
+        with:
+          key:
+            padv_artifacts-${{ github.run_id }}-${{ github.run_attempt }}
+
+          restore-keys:
+            padv_artifacts-cache
+
+          path:
+            |
+            AutoCodeGen
+            PA_Results/CalculateFeedforwardVoltages/model_standards_results
+            PA_Results/CalculateMaximumFluxLimit/model_standards_results
+            PA_Results/CalculateOptimalFlux/model_standards_results
+            PA_Results/CalculateTorqueLimits/model_standards_results
+            PA_Results/FluxWeakeningControl/model_standards_results
+            PA_Results/RsCalculation/model_standards_results
+            PA_Results/TractionEmotorRequirements/report
+            PA_Results/test_results
+            derived/artifacts.dmr
+
+
+      - name:
+          Upload Artifacts
+
+        if:
+          ${{ !cancelled() }}
+
+        uses:
+          actions/upload-artifact@v4
+
+        with:
+          name:
+            Restore_Cache_padv_artifacts
+
+          path:
+            |
+            derived/artifacts.dmr
+            AutoCodeGen
+            PA_Results/CalculateFeedforwardVoltages/model_standards_results
+            PA_Results/CalculateMaximumFluxLimit/model_standards_results
+            PA_Results/CalculateOptimalFlux/model_standards_results
+            PA_Results/CalculateTorqueLimits/model_standards_results
+            PA_Results/FluxWeakeningControl/model_standards_results
+            PA_Results/RsCalculation/model_standards_results
+            PA_Results/TractionEmotorRequirements/report
+            PA_Results/test_results
+
+          retention-days:
+            90
+
+
+
+
+  Runprocess:
+    if:
+      ${{ !cancelled() }}
+
+    needs:
+      Restore_Cache
+
+    runs-on:
+      ubuntu-latest
+    
+    env:
+      MLM_LICENSE_TOKEN: ${{ secrets.MATLAB_BATCH_TOKEN }}   # Uses environment secret
+
+    steps:
+      - name:
+          Checkout Repository
+
+        uses:
+          actions/checkout@v4
+
+      - name:
+          Download Artifacts
+        continue-on-error: true
+        uses:
+          actions/download-artifact@v4
+
+        with:
+          name:
+            Restore_Cache_padv_artifacts
+
+
+      - name:
+          Setup MATLAB
+        uses: matlab-actions/setup-matlab@v2
+        with:
+          products: >
+            Simulink
+            Stateflow
+            Simulink_Test
+            Simulink_Coverage
+            Simulink_Check
+            Requirements_Toolbox
+            CI/CD_Automation_for_Simulink_Check
+            MATLAB_Coder
+            Simulink_Coder
+            Embedded_Coder
+            System_Composer
+            Simulink_Design_Verifier
+            Powertrain_Blockset
+            Simulink_Report_Generator
+          cache: true
+          release: R2025b  
+
+      - name: 
+          Start Display Server
+        
+        run: |
+         sudo apt-get install -y xvfb
+         Xvfb :99 &
+         export DISPLAY=:99
+         echo "DISPLAY=:99" >> $GITHUB_ENV
+
+      - name:
+          Launch MATLAB
+
+        # run:
+        #  >
+        #  matlab-batch 
+        #  -nodesktop 
+        #  -logfile output.log "openProject(pwd);runprocess(Process = 'CIPipeline', Force = false, ExitInBatchMode = true, RerunFailedTasks = false, RerunErroredTasks = false, GenerateJUnitForProcess = false);" 
+        uses: matlab-actions/run-command@v2
+        with:
+          command: openProject(pwd);runprocess(Process = 'CIPipeline', Force = false, ExitInBatchMode = true, RerunFailedTasks = false, RerunErroredTasks = false, GenerateJUnitForProcess = true);
+
+      - name:
+          Upload Artifacts
+
+        if:
+          ${{ !cancelled() }}
+
+        uses:
+          actions/upload-artifact@v4
+
+        with:
+          name:
+            Runprocess_padv_artifacts
+
+          path:
+            |
+            derived/artifacts.dmr
+            AutoCodeGen
+            PA_Results/CalculateFeedforwardVoltages/model_standards_results
+            PA_Results/CalculateMaximumFluxLimit/model_standards_results
+            PA_Results/CalculateOptimalFlux/model_standards_results
+            PA_Results/CalculateTorqueLimits/model_standards_results
+            PA_Results/FluxWeakeningControl/model_standards_results
+            PA_Results/RsCalculation/model_standards_results
+            PA_Results/TractionEmotorRequirements/report
+            PA_Results/test_results
+
+          retention-days:
+            90
