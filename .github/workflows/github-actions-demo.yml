@@ -11,32 +11,24 @@ permissions:
 jobs:
 
   # =====================================================
-  # 1. Restore Cache (Optional - if you need it)
+  # 1. Setup MATLAB & Restore Cache
   # =====================================================
-  Restore_Cache:
+  Setup_MATLAB:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
 
+      # Restore MATLAB cache if available
       - name: Restore MATLAB Cache
         id: cache-restore
-        uses: actions/cache/restore@v4
+        uses: actions/cache@v4
         with:
-          path: .matlab
-          key: matlab-cache-${{ runner.os }}
-          restore-keys: matlab-cache-
+          path: ${{ runner.tool_cache }}/matlab
+          key: matlab-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: matlab-${{ runner.os }}-
 
-  # =====================================================
-  # 2. Task 1 — Generate Requirements Report
-  # =====================================================
-  Task1_GenerateRequirementsReport:
-    runs-on: ubuntu-latest
-    needs: Restore_Cache
-
-    steps:
-      - uses: actions/checkout@v4
-
+      # Install MATLAB + required products if not cached
       - name: Setup MATLAB
         uses: matlab-actions/setup-matlab@v2
         with:
@@ -57,6 +49,24 @@ jobs:
             Powertrain_Blockset
             Simulink_Report_Generator
             Simulink_Control_Design
+          cache: true
+
+      - name: Save MATLAB Cache
+        if: steps.cache-restore.outputs.cache-hit != 'true'
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.tool_cache }}/matlab
+          key: matlab-${{ runner.os }}-${{ github.run_id }}
+
+  # =====================================================
+  # 2. Task 1 — Generate Requirements Report
+  # =====================================================
+  Task1_GenerateRequirementsReport:
+    runs-on: ubuntu-latest
+    needs: Setup_MATLAB
+
+    steps:
+      - uses: actions/checkout@v4
 
       - name: Run Task 1
         uses: matlab-actions/run-command@v2
@@ -69,6 +79,15 @@ jobs:
               RerunFailedTasks=false, RerunErroredTasks=false, ...
               GenerateJUnitForProcess=false);
 
+      - name: Upload Task 1 Artifacts
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: Task1_RequirementsReport
+          path: |
+            PA_Results/TractionEmotorRequirements/report
+            derived/artifacts.dmr
+
   # =====================================================
   # 3. Task 2 — Run Model Standards Check
   # =====================================================
@@ -78,10 +97,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-
-      - uses: matlab-actions/setup-matlab@v2
-        with:
-          release: R2025b
 
       - name: Run Task 2
         uses: matlab-actions/run-command@v2
@@ -94,19 +109,28 @@ jobs:
               RerunFailedTasks=false, RerunErroredTasks=false, ...
               GenerateJUnitForProcess=false);
 
+      - name: Upload Task 2 Artifacts
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: Task2_ModelStandards
+          path: |
+            PA_Results/CalculateFeedforwardVoltages/model_standards_results
+            PA_Results/CalculateMaximumFluxLimit/model_standards_results
+            PA_Results/CalculateOptimalFlux/model_standards_results
+            PA_Results/CalculateTorqueLimits/model_standards_results
+            PA_Results/FluxWeakeningControl/model_standards_results
+            PA_Results/RsCalculation/model_standards_results
+
   # =====================================================
   # 4. Task 3 — Run Tests Per Test Case
   # =====================================================
   Task3_RunTests:
     runs-on: ubuntu-latest
-    needs: Task2_RunModelStandards
+    needs: Task2_CheckModelingStandards
 
     steps:
       - uses: actions/checkout@v4
-
-      - uses: matlab-actions/setup-matlab@v2
-        with:
-          release: R2025b
 
       - name: Run Task 3
         uses: matlab-actions/run-command@v2
@@ -119,19 +143,24 @@ jobs:
               RerunFailedTasks=false, RerunErroredTasks=false, ...
               GenerateJUnitForProcess=false);
 
+      - name: Upload Task 3 Artifacts
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: Task3_TestResults
+          path: |
+            PA_Results/test_results
+            derived/artifacts.dmr
+
   # =====================================================
   # 5. Task 4 — Generate Code
   # =====================================================
   Task4_GenerateCode:
     runs-on: ubuntu-latest
-    needs: Task3_RunTestsPerTestCase
+    needs: Task3_RunTests
 
     steps:
       - uses: actions/checkout@v4
-
-      - uses: matlab-actions/setup-matlab@v2
-        with:
-          release: R2025b
 
       - name: Run Task 4
         uses: matlab-actions/run-command@v2
@@ -144,6 +173,15 @@ jobs:
               RerunFailedTasks=false, RerunErroredTasks=false, ...
               GenerateJUnitForProcess=false);
 
+      - name: Upload Task 4 Artifacts
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: Task4_GeneratedCode
+          path: |
+            AutoCodeGen
+            derived/artifacts.dmr
+
   # =====================================================
   # 6. Task 5 — Merge Test Results
   # =====================================================
@@ -153,10 +191,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-
-      - uses: matlab-actions/setup-matlab@v2
-        with:
-          release: R2025b
 
       - name: Run Task 5
         uses: matlab-actions/run-command@v2
@@ -168,3 +202,12 @@ jobs:
               Force=false, ExitInBatchMode=true, ...
               RerunFailedTasks=false, RerunErroredTasks=false, ...
               GenerateJUnitForProcess=false);
+
+      - name: Upload Task 5 Artifacts
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: Task5_MergedResults
+          path: |
+            PA_Results/test_results
+            derived/artifacts.dmr
