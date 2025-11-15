@@ -8,6 +8,10 @@ permissions:
   contents: read
   checks: write
 
+env:
+  PATH_TO_MATLAB:
+    /opt/matlab/R2025b
+
 jobs:
 
   # =====================================================
@@ -23,10 +27,13 @@ jobs:
       - name: Restore MATLAB Cache
         id: cache-restore
         uses: actions/cache@v4
+        
         with:
-          path: ${{ runner.tool_cache }}/matlab
-          key: matlab-${{ runner.os }}-${{ github.run_id }}
-          restore-keys: matlab-${{ runner.os }}-
+          key:
+            padv_artifacts-${{ github.run_id }}-${{ github.run_attempt }}
+
+          restore-keys:
+            padv_artifacts-cache
 
       # Install MATLAB + required products if not cached
       - name: Setup MATLAB
