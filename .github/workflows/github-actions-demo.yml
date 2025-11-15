@@ -3,8 +3,7 @@ name: EMotorSoftwareMBD Pipeline
 on:
   push:
     branches: [ master ]
-  # Uncomment to allow manual triggers:
-  # workflow_dispatch:
+  # workflow_dispatch: # Uncomment to allow manual triggers
 
 permissions:
   contents: read
@@ -60,7 +59,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: Restore_Cache
     env:
-      MLM_LICENSE_TOKEN: ${{ secrets.MATLAB_BATCH_TOKEN }} # Uses environment secret
+      MLM_LICENSE_TOKEN: ${{ secrets.MATLAB_BATCH_TOKEN }}
 
     steps:
       - uses: actions/checkout@v4
@@ -112,7 +111,7 @@ jobs:
   # =====================================================
   Task2_CheckModelingStandards:
     runs-on: ubuntu-latest
-    needs: Task1_GenerateRequirementsReport
+    needs: Restore_Cache
     env:
       MLM_LICENSE_TOKEN: ${{ secrets.MATLAB_BATCH_TOKEN }}
 
@@ -170,7 +169,7 @@ jobs:
   # =====================================================
   Task3_RunTests:
     runs-on: ubuntu-latest
-    needs: Task2_CheckModelingStandards
+    needs: Restore_Cache
     env:
       MLM_LICENSE_TOKEN: ${{ secrets.MATLAB_BATCH_TOKEN }}
 
@@ -224,7 +223,7 @@ jobs:
   # =====================================================
   Task4_GenerateCode:
     runs-on: ubuntu-latest
-    needs: Task3_RunTests
+    needs: Restore_Cache
     env:
       MLM_LICENSE_TOKEN: ${{ secrets.MATLAB_BATCH_TOKEN }}
 
@@ -278,7 +277,11 @@ jobs:
   # =====================================================
   Task5_MergeTestResults:
     runs-on: ubuntu-latest
-    needs: Task4_GenerateCode
+    needs:
+      - Task1_GenerateRequirementsReport
+      - Task2_CheckModelingStandards
+      - Task3_RunTests
+      - Task4_GenerateCode
     env:
       MLM_LICENSE_TOKEN: ${{ secrets.MATLAB_BATCH_TOKEN }}
 
