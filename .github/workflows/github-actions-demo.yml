@@ -1,52 +1,47 @@
-name:
-  EMotorSoftwareMBD Pipeline
+name: EMotorSoftwareMBD Pipeline
 
 on:
-  # workflow_dispatch:
-  # Triggers the workflow on push events but only for the main branch
   push:
     branches: [ master ]
+  # Uncomment to allow manual triggers:
+  # workflow_dispatch:
 
 permissions:
-  checks:
-    write
+  contents: read
+  checks: write
 
-  contents:
-    read
-
-
+# Global env vars available to all jobs
 env:
-  PATH_TO_MATLAB:
-    /opt/matlab/R2025b
-
+  PATH_TO_MATLAB: /opt/matlab/R2025b
 
 jobs:
-  Restore_Cache:
-    runs-on:
-      ubuntu-latest
+
+  # ---------------------------------------------------------
+  # 1) RESTORE CACHE JOB
+  # ---------------------------------------------------------
+  restore_cache:
+    name: Restore Cached Artifacts
+    runs-on: ubuntu-latest
 
     steps:
-      - name:
-          Checkout Repository
 
-        uses:
-          actions/checkout@v4
+      # Always checkout at start of job
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name:
-          Restore Cache
-
-        uses:
-          actions/cache@v4
-
+      # Restore cache with stable fallback key
+      # Best practice: key should be stable across "successful" builds
+      - name: Restore MATLAB build artifacts from cache
+        uses: actions/cache@v4
         with:
-          key:
-            padv_artifacts-${{ github.run_id }}-${{ github.run_attempt }}
+          # primary key is tied to workflow run, ensuring uniqueness
+          key: padv_artifacts-${{ github.run_id }}-${{ github.run_attempt }}
+          
+          # fallback key for reuse of last successful build cache
+          restore-keys: |
+            padv_artifacts-
 
-          restore-keys:
-            padv_artifacts-cache
-
-          path:
-            |
+          path: |
             AutoCodeGen
             PA_Results/CalculateFeedforwardVoltages/model_standards_results
             PA_Results/CalculateMaximumFluxLimit/model_standards_results
@@ -58,22 +53,14 @@ jobs:
             PA_Results/test_results
             derived/artifacts.dmr
 
-
-      - name:
-          Upload Artifacts
-
-        if:
-          ${{ !cancelled() }}
-
-        uses:
-          actions/upload-artifact@v4
-
+      # Upload artifacts for downstream jobs
+      - name: Upload restored cache artifacts
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
         with:
-          name:
-            Restore_Cache_padv_artifacts
-
-          path:
-            |
+          name: restore_cache_artifacts
+          retention-days: 90
+          path: |
             derived/artifacts.dmr
             AutoCodeGen
             PA_Results/CalculateFeedforwardVoltages/model_standards_results
@@ -85,48 +72,40 @@ jobs:
             PA_Results/TractionEmotorRequirements/report
             PA_Results/test_results
 
-          retention-days:
-            90
 
+  # ---------------------------------------------------------
+  # 2) MAIN PROCESS JOB — DEPENDS ON RESTORE CACHE
+  # ---------------------------------------------------------
+  run_process:
+    name: Run MATLAB CI Pipeline
+    needs: restore_cache
+    runs-on: ubuntu-latest
 
+    if: ${{ !cancelled() }}   # Skip if workflow was cancelled early
 
-
-  Runprocess:
-    if:
-      ${{ !cancelled() }}
-
-    needs:
-      Restore_Cache
-
-    runs-on:
-      ubuntu-latest
-    
     env:
-      MLM_LICENSE_TOKEN: ${{ secrets.MATLAB_BATCH_TOKEN }}   # Uses environment secret
+      # Secure secret injection (job-level)
+      MLM_LICENSE_TOKEN: ${{ secrets.MATLAB_BATCH_TOKEN }}
 
     steps:
-      - name:
-          Checkout Repository
 
-        uses:
-          actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name:
-          Download Artifacts
-        continue-on-error: true
-        uses:
-          actions/download-artifact@v4
-
+      # Bring in cached artifacts
+      - name: Download restored cache artifacts
+        uses: actions/download-artifact@v4
+        continue-on-error: true  # It's OK if no artifacts exist
         with:
-          name:
-            Restore_Cache_padv_artifacts
+          name: restore_cache_artifacts
 
-
-      - name:
-          Setup MATLAB
+      # Install MATLAB with selected products
+      - name: Setup MATLAB
         uses: matlab-actions/setup-matlab@v2
         with:
-          products: >
+          release: R2025b
+          cache: true
+          products: |
             Simulink
             Stateflow
             Simulink_Test
@@ -142,45 +121,37 @@ jobs:
             Powertrain_Blockset
             Simulink_Report_Generator
             Simulink_Control_Design
-          cache: true
-          release: R2025b  
 
-      - name: 
-          Start Display Server
-        
-        run: |
-         sudo apt-get install -y xvfb
-         Xvfb :99 &
-         export DISPLAY=:99
-         echo "DISPLAY=:99" >> $GITHUB_ENV
+      # Start a display server (for models needing GUI APIs)
+      # - name: Start virtual display (Xvfb)
+      #   run: |
+      #     sudo apt-get update -y
+      #     sudo apt-get install -y xvfb
+      #     Xvfb :99 &
+      #     echo "DISPLAY=:99" >> $GITHUB_ENV
 
-      - name:
-          Launch MATLAB
-
-        # run:
-        #  >
-        #  matlab-batch 
-        #  -nodesktop 
-        #  -logfile output.log "openProject(pwd);runprocess(Process = 'CIPipeline', Force = false, ExitInBatchMode = true, RerunFailedTasks = false, RerunErroredTasks = false, GenerateJUnitForProcess = false);" 
+      # Run MATLAB process script in batch mode
+      - name: Run MATLAB CI process
         uses: matlab-actions/run-command@v2
         with:
-          command: openProject(pwd);runprocess(Process = 'CIPipeline', Force = false, ExitInBatchMode = true, RerunFailedTasks = false, RerunErroredTasks = false, GenerateJUnitForProcess = true);
+          command: |
+            openProject(pwd);
+            runprocess( ...
+              Process="CIPipeline", ...
+              Force=false, ...
+              ExitInBatchMode=true, ...
+              RerunFailedTasks=false, ...
+              RerunErroredTasks=false, ...
+              GenerateJUnitForProcess=true);
 
-      - name:
-          Upload Artifacts
-
-        if:
-          ${{ !cancelled() }}
-
-        uses:
-          actions/upload-artifact@v4
-
+      # Upload CI output results
+      - name: Upload CI output artifacts
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
         with:
-          name:
-            Runprocess_padv_artifacts
-
-          path:
-            |
+          name: runprocess_artifacts
+          retention-days: 90
+          path: |
             derived/artifacts.dmr
             AutoCodeGen
             PA_Results/CalculateFeedforwardVoltages/model_standards_results
@@ -191,6 +162,3 @@ jobs:
             PA_Results/RsCalculation/model_standards_results
             PA_Results/TractionEmotorRequirements/report
             PA_Results/test_results
-
-          retention-days:
-            90
