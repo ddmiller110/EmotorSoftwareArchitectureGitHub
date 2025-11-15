@@ -1,14 +1,13 @@
-name: MBD Pipeline
+name: EMotorSoftwareMBD Pipeline
 
 on:
- push:
-    branches: [ main ]
-      
+  push:
+    branches: [ master ]
+  # Uncomment to allow manual triggers:
+  # workflow_dispatch:
+
 permissions:
-  checks:
-    write
-  contents:
-    read
+  contents: read
 
 env:
   PATH_TO_MATLAB: /opt/matlab/R2025b
