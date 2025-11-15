@@ -8,6 +8,7 @@ on:
 
 permissions:
   contents: read
+  checks: write
 
 env:
   PATH_TO_MATLAB: /opt/matlab/R2025b
