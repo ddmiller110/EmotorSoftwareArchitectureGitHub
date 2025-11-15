@@ -1,0 +1,159 @@
+name: EMotorSoftwareMBD Pipeline
+
+on:
+  push:
+    branches: [ master ]
+  # Uncomment to allow manual triggers:
+  # workflow_dispatch:
+
+permissions:
+  contents: read
+  checks: write
+
+# Global env vars available to all jobs
+env:
+  PATH_TO_MATLAB: /opt/matlab/R2025b
+
+jobs:
+
+  # ---------------------------------------------------------
+  # 1) RESTORE CACHE JOB
+  # ---------------------------------------------------------
+  restore_cache:
+    name: Restore Cached Artifacts
+    runs-on: ubuntu-latest
+
+    steps:
+
+      # Always checkout at start of job
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Restore cache with stable fallback key
+      # Best practice: key should be stable across "successful" builds
+      - name: Restore MATLAB build artifacts from cache
+        uses: actions/cache@v4
+        with:
+          # primary key is tied to workflow run, ensuring uniqueness
+          key: padv_artifacts-${{ github.run_id }}-${{ github.run_attempt }}
+          
+          # fallback key for reuse of last successful build cache
+          restore-keys: |
+            padv_artifacts-
+          path: |
+            AutoCodeGen
+            PA_Results/CalculateFeedforwardVoltages/model_standards_results
+            PA_Results/CalculateMaximumFluxLimit/model_standards_results
+            PA_Results/CalculateOptimalFlux/model_standards_results
+            PA_Results/CalculateTorqueLimits/model_standards_results
+            PA_Results/FluxWeakeningControl/model_standards_results
+            PA_Results/RsCalculation/model_standards_results
+            PA_Results/TractionEmotorRequirements/report
+            PA_Results/test_results
+            derived/artifacts.dmr
+      # Upload artifacts for downstream jobs
+      - name: Upload restored cache artifacts
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: restore_cache_artifacts
+          retention-days: 90
+          path: |
+            derived/artifacts.dmr
+            AutoCodeGen
+            PA_Results/CalculateFeedforwardVoltages/model_standards_results
+            PA_Results/CalculateMaximumFluxLimit/model_standards_results
+            PA_Results/CalculateOptimalFlux/model_standards_results
+            PA_Results/CalculateTorqueLimits/model_standards_results
+            PA_Results/FluxWeakeningControl/model_standards_results
+            PA_Results/RsCalculation/model_standards_results
+            PA_Results/TractionEmotorRequirements/report
+            PA_Results/test_results
+  # ---------------------------------------------------------
+  # 2) MAIN PROCESS JOB — DEPENDS ON RESTORE CACHE
+  # ---------------------------------------------------------
+  run_process:
+    name: Run MATLAB CI Pipeline
+    needs: restore_cache
+    runs-on: ubuntu-latest
+
+    if: ${{ !cancelled() }}   # Skip if workflow was cancelled early
+
+    env:
+      # Secure secret injection (job-level)
+      MLM_LICENSE_TOKEN: ${{ secrets.MATLAB_BATCH_TOKEN }}
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Bring in cached artifacts
+      - name: Download restored cache artifacts
+        uses: actions/download-artifact@v4
+        continue-on-error: true  # It's OK if no artifacts exist
+        with:
+          name: restore_cache_artifacts
+
+      # Install MATLAB with selected products
+      - name: Setup MATLAB
+        uses: matlab-actions/setup-matlab@v2
+        with:
+          release: R2025b
+          cache: true
+          products: |
+            Simulink
+            Stateflow
+            Simulink_Test
+            Simulink_Coverage
+            Simulink_Check
+            Requirements_Toolbox
+            CI/CD_Automation_for_Simulink_Check
+            MATLAB_Coder
+            Simulink_Coder
+            Embedded_Coder
+            System_Composer
+            Simulink_Design_Verifier
+            Powertrain_Blockset
+            Simulink_Report_Generator
+            Simulink_Control_Design
+      # Start a display server (for models needing GUI APIs)
+      # - name: Start virtual display (Xvfb)
+      #   run: |
+      #     sudo apt-get update -y
+      #     sudo apt-get install -y xvfb
+      #     Xvfb :99 &
+      #     echo "DISPLAY=:99" >> $GITHUB_ENV
+
+      # Run MATLAB process script in batch mode
+      - name: Run MATLAB CI process
+        uses: matlab-actions/run-command@v2
+        with:
+          command: |
+            openProject(pwd);
+            runprocess( ...
+              Process="CIPipeline", ...
+              Force=false, ...
+              ExitInBatchMode=true, ...
+              RerunFailedTasks=false, ...
+              RerunErroredTasks=false, ...
+              GenerateJUnitForProcess=true);
+              
+      # Upload CI output results
+      - name: Upload CI output artifacts
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: runprocess_artifacts
+          retention-days: 90
+          path: |
+            derived/artifacts.dmr
+            AutoCodeGen
+            PA_Results/CalculateFeedforwardVoltages/model_standards_results
+            PA_Results/CalculateMaximumFluxLimit/model_standards_results
+            PA_Results/CalculateOptimalFlux/model_standards_results
+            PA_Results/CalculateTorqueLimits/model_standards_results
+            PA_Results/FluxWeakeningControl/model_standards_results
+            PA_Results/RsCalculation/model_standards_results
+            PA_Results/TractionEmotorRequirements/report
+            PA_Results/test_results
