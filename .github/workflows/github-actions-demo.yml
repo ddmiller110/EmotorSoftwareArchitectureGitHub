@@ -1,10 +1,8 @@
 name: MBD Pipeline
 
 on:
-  push:
-    branches: 
-      - main
-      - Feature
+ push:
+    branches: [ main ]
       
 permissions:
   checks:
