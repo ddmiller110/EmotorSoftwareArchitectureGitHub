@@ -1,46 +1,76 @@
-name: EMotorSoftwareMBD Pipeline
+name: MBD Pipeline
 
 on:
   push:
-    branches: [ master ]
-
+    branches: 
+      - main
+      - Feature
+      
 permissions:
-  contents: read
-  checks: write
+  checks:
+    write
+  contents:
+    read
 
 env:
-  PATH_TO_MATLAB:
-    /opt/matlab/R2025b
+  PATH_TO_MATLAB: /opt/matlab/R2025b
 
 jobs:
+  # =====================================================
+  # 1. Restore Cache
+  # =====================================================
+  Restore_Cache:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Restore Cache
+        uses: actions/cache@v4
+        with:
+          key: padv_artifacts-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: padv_artifacts-cache
+          path: |
+            PA_Results/CalculateFeedforwardVoltages/model_standards_results
+            PA_Results/CalculateMaximumFluxLimit/model_standards_results
+            PA_Results/CalculateOptimalFlux/model_standards_results
+            PA_Results/CalculateTorqueLimits/model_standards_results
+            PA_Results/FluxWeakeningControl/model_standards_results
+            PA_Results/RsCalculation/model_standards_results
+            derived/artifacts.dmr
+
+      - name: Upload Artifacts
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: 01_Restore_Cache_padv_artifacts
+          path: |
+            PA_Results/CalculateFeedforwardVoltages/model_standards_results
+            PA_Results/CalculateMaximumFluxLimit/model_standards_results
+            PA_Results/CalculateOptimalFlux/model_standards_results
+            PA_Results/CalculateTorqueLimits/model_standards_results
+            PA_Results/FluxWeakeningControl/model_standards_results
+            PA_Results/RsCalculation/model_standards_results
+            derived/artifacts.dmr
+          retention-days: 90
 
   # =====================================================
-  # 1. Setup MATLAB & Restore Cache
+  # 2. Task 1 — Generate Requirements Report
   # =====================================================
-  Setup_MATLAB:
+  Task1_GenerateRequirementsReport:
     runs-on: ubuntu-latest
+    needs: Restore_Cache
+    env:
+      MLM_LICENSE_TOKEN: ${{ secrets.MATLAB_BATCH_TOKEN }} # Uses environment secret
 
     steps:
       - uses: actions/checkout@v4
 
-      # Restore MATLAB cache if available
-      - name: Restore MATLAB Cache
-        id: cache-restore
-        uses: actions/cache@v4
-        
-        with:
-          key:
-            padv_artifacts-${{ github.run_id }}-${{ github.run_attempt }}
-
-          restore-keys:
-            padv_artifacts-cache
-
-      # Install MATLAB + required products if not cached
       - name: Setup MATLAB
         uses: matlab-actions/setup-matlab@v2
         with:
-          release: R2025b
-          products: >
+          products: |
             Simulink
             Stateflow
             Simulink_Test
@@ -56,24 +86,8 @@ jobs:
             Powertrain_Blockset
             Simulink_Report_Generator
             Simulink_Control_Design
+          release: R2025b
           cache: true
-
-      - name: Save MATLAB Cache
-        if: steps.cache-restore.outputs.cache-hit != 'true'
-        uses: actions/cache@v4
-        with:
-          path: ${{ runner.tool_cache }}/matlab
-          key: matlab-${{ runner.os }}-${{ github.run_id }}
-
-  # =====================================================
-  # 2. Task 1 — Generate Requirements Report
-  # =====================================================
-  Task1_GenerateRequirementsReport:
-    runs-on: ubuntu-latest
-    needs: Setup_MATLAB
-
-    steps:
-      - uses: actions/checkout@v4
 
       - name: Run Task 1
         uses: matlab-actions/run-command@v2
@@ -101,9 +115,33 @@ jobs:
   Task2_CheckModelingStandards:
     runs-on: ubuntu-latest
     needs: Task1_GenerateRequirementsReport
+    env:
+      MLM_LICENSE_TOKEN: ${{ secrets.MATLAB_BATCH_TOKEN }}
 
     steps:
       - uses: actions/checkout@v4
+
+      - name: Setup MATLAB
+        uses: matlab-actions/setup-matlab@v2
+        with:
+          products: |
+            Simulink
+            Stateflow
+            Simulink_Test
+            Simulink_Coverage
+            Simulink_Check
+            Requirements_Toolbox
+            CI/CD_Automation_for_Simulink_Check
+            MATLAB_Coder
+            Simulink_Coder
+            Embedded_Coder
+            System_Composer
+            Simulink_Design_Verifier
+            Powertrain_Blockset
+            Simulink_Report_Generator
+            Simulink_Control_Design
+          release: R2025b
+          cache: true
 
       - name: Run Task 2
         uses: matlab-actions/run-command@v2
@@ -135,9 +173,33 @@ jobs:
   Task3_RunTests:
     runs-on: ubuntu-latest
     needs: Task2_CheckModelingStandards
+    env:
+      MLM_LICENSE_TOKEN: ${{ secrets.MATLAB_BATCH_TOKEN }}
 
     steps:
       - uses: actions/checkout@v4
+
+      - name: Setup MATLAB
+        uses: matlab-actions/setup-matlab@v2
+        with:
+          products: |
+            Simulink
+            Stateflow
+            Simulink_Test
+            Simulink_Coverage
+            Simulink_Check
+            Requirements_Toolbox
+            CI/CD_Automation_for_Simulink_Check
+            MATLAB_Coder
+            Simulink_Coder
+            Embedded_Coder
+            System_Composer
+            Simulink_Design_Verifier
+            Powertrain_Blockset
+            Simulink_Report_Generator
+            Simulink_Control_Design
+          release: R2025b
+          cache: true
 
       - name: Run Task 3
         uses: matlab-actions/run-command@v2
@@ -165,9 +227,33 @@ jobs:
   Task4_GenerateCode:
     runs-on: ubuntu-latest
     needs: Task3_RunTests
+    env:
+      MLM_LICENSE_TOKEN: ${{ secrets.MATLAB_BATCH_TOKEN }}
 
     steps:
       - uses: actions/checkout@v4
+
+      - name: Setup MATLAB
+        uses: matlab-actions/setup-matlab@v2
+        with:
+          products: |
+            Simulink
+            Stateflow
+            Simulink_Test
+            Simulink_Coverage
+            Simulink_Check
+            Requirements_Toolbox
+            CI/CD_Automation_for_Simulink_Check
+            MATLAB_Coder
+            Simulink_Coder
+            Embedded_Coder
+            System_Composer
+            Simulink_Design_Verifier
+            Powertrain_Blockset
+            Simulink_Report_Generator
+            Simulink_Control_Design
+          release: R2025b
+          cache: true
 
       - name: Run Task 4
         uses: matlab-actions/run-command@v2
@@ -195,9 +281,33 @@ jobs:
   Task5_MergeTestResults:
     runs-on: ubuntu-latest
     needs: Task4_GenerateCode
+    env:
+      MLM_LICENSE_TOKEN: ${{ secrets.MATLAB_BATCH_TOKEN }}
 
     steps:
       - uses: actions/checkout@v4
+
+      - name: Setup MATLAB
+        uses: matlab-actions/setup-matlab@v2
+        with:
+          products: |
+            Simulink
+            Stateflow
+            Simulink_Test
+            Simulink_Coverage
+            Simulink_Check
+            Requirements_Toolbox
+            CI/CD_Automation_for_Simulink_Check
+            MATLAB_Coder
+            Simulink_Coder
+            Embedded_Coder
+            System_Composer
+            Simulink_Design_Verifier
+            Powertrain_Blockset
+            Simulink_Report_Generator
+            Simulink_Control_Design
+          release: R2025b
+          cache: true
 
       - name: Run Task 5
         uses: matlab-actions/run-command@v2
