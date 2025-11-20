@@ -537,6 +537,42 @@
       </propertySet>
       <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="7189127d-566c-44ba-b15a-b4ed991bb9bd"/>
     </prototypes>
+    <prototypes type="systemcomposer.profile.Prototype" uuid="6ae3b10d-07d7-4892-9202-837e811ed099">
+      <description>ISO 26262 has five distinct safety levels (Quality Management [QM], and ASIL A–D) that can be used to classify systems, or component elements based on their functional safety aspects. </description>
+      <p_Name>SafetyIntegrityLevel</p_Name>
+      <defaultStereotypeMap type="systemcomposer.profile.DefaultStereotypeMap" uuid="a53e7ea1-ac02-470d-aec1-76a7f1fd7216"/>
+      <propertySet type="systemcomposer.property.PropertySet" uuid="3eaa4d60-ccae-4817-9d22-71f918ec1018">
+        <properties type="systemcomposer.property.PropertyDefinition" uuid="e4a0b8d9-7d51-47df-bb27-4c4539e36ca1">
+          <currentVersionId>9451b735-f0b4-4a0c-a938-625fd46196ca</currentVersionId>
+          <p_Name>ASIL</p_Name>
+          <defaultValue type="systemcomposer.property.Value" uuid="0620d245-7ab3-4797-80a6-a02d4145993c">
+            <storedExpression>&apos;QM&apos;</storedExpression>
+            <valueTypeProxy type="systemcomposer.services.proxy.ProxySource" uuid="30b63143-03b3-40e4-b83a-8cc05345fec4">
+              <Proxy type="systemcomposer.services.proxy.UnidirectionalProxy" uuid="21a2d298-e035-4bc6-a289-25de08558587"/>
+              <realElement type="systemcomposer.property.Value" uuid="0620d245-7ab3-4797-80a6-a02d4145993c"/>
+            </valueTypeProxy>
+          </defaultValue>
+          <ownedType type="systemcomposer.property.Enumeration" uuid="47408790-2ad7-46fb-9be6-4ef6270a54d3">
+            <nameProxy>ASIL</nameProxy>
+            <unitChecker type="systemcomposer.property.UnitQueryClientWrapper" uuid="73024de5-152b-4cf6-b353-0e6553f826f5"/>
+            <p_Name>ASIL</p_Name>
+            <typeProxy type="systemcomposer.services.proxy.ProxySource" uuid="9496da94-6378-4f67-b8a2-b8d2678c1f29">
+              <Proxy type="systemcomposer.services.proxy.UnidirectionalProxy" uuid="1ed6d787-5507-443c-992b-911b6eb0c99f"/>
+              <realElement type="systemcomposer.property.Enumeration" uuid="47408790-2ad7-46fb-9be6-4ef6270a54d3"/>
+            </typeProxy>
+            <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="8bc0b6f4-fe6b-4d96-af1f-a5b634a84d33"/>
+          </ownedType>
+          <typeProxy type="systemcomposer.services.proxy.ProxySource" uuid="abb1c88c-da88-47bd-977d-eeffb1c339c6">
+            <Proxy type="systemcomposer.services.proxy.BidirectionalProxy" uuid="a1fac9c3-5120-41a5-9daf-9995b9cac2f4"/>
+            <realElement type="systemcomposer.property.PropertyDefinition" uuid="e4a0b8d9-7d51-47df-bb27-4c4539e36ca1"/>
+          </typeProxy>
+          <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="c44549f4-c77c-4704-8abd-ebae477f881a"/>
+        </properties>
+        <p_Name>SafetyIntegrityLevel</p_Name>
+        <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="96f9f4ca-a8c7-4c76-a2da-6d1c442d6e30"/>
+      </propertySet>
+      <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="ab28e2da-48d4-45e9-a62e-00087958e3a9"/>
+    </prototypes>
     <prototypes type="systemcomposer.profile.Prototype" uuid="4a08a09c-4845-496c-91d7-7130c73638d2">
       <appliesTo>Port</appliesTo>
       <componentHeaderColor type="systemcomposer.profile.RGBValueStruct">
@@ -714,6 +750,9 @@
       </propertySet>
       <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="0bde9276-4e2b-475d-aca4-bb3d1509bf74"/>
     </prototypes>
+    <valueTypes type="systemcomposer.property.Enumeration" uuid="e9b8e20d-2e05-4429-a100-917c2124c9d7">
+      <p_Name>ASIL</p_Name>
+    </valueTypes>
     <valueTypes type="systemcomposer.property.BooleanType" uuid="2fa8ee79-9766-4549-8bb2-c43bc4533584">
       <p_Name>boolean</p_Name>
     </valueTypes>
@@ -776,11 +815,6 @@
     <p_Name>TractionEmotorSoftwareArch_profiles</p_Name>
     <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="19249318-206a-4336-96fc-2f07ab19a464"/>
   </systemcomposer.profile.Profile>
-  <systemcomposer.services.proxy.ModelIdentifier type="systemcomposer.services.proxy.ModelIdentifier" uuid="8bf417ba-4a4e-4e47-9c8b-d3a4159d371a">
-    <URI>TractionEmotorSoftwareArch_profiles</URI>
-    <modelType>PROFILE_MODEL</modelType>
-  </systemcomposer.services.proxy.ModelIdentifier>
-  <systemcomposer.property.UnitQueryClientWrapper type="systemcomposer.property.UnitQueryClientWrapper" uuid="73024de5-152b-4cf6-b353-0e6553f826f5"/>
   <systemcomposer.services.proxy.ModelResolver type="systemcomposer.services.proxy.ModelResolver" uuid="e3bda778-8235-4a88-9808-27d5a262cf90">
     <Proxies type="systemcomposer.services.proxy.BidirectionalProxy" uuid="4a119dd7-8f91-46f3-b08c-a19f439b86d8">
       <Source type="systemcomposer.services.proxy.ProxySource" uuid="90434e30-5107-4779-86db-813e26879764"/>
@@ -832,12 +866,32 @@
     <modelType>PROFILE_MODEL</modelType>
     <URI>TractionEmotorSoftwareArch_profiles</URI>
   </systemcomposer.services.proxy.ModelResolver>
+  <systemcomposer.property.UnitQueryClientWrapper type="systemcomposer.property.UnitQueryClientWrapper" uuid="73024de5-152b-4cf6-b353-0e6553f826f5"/>
+  <systemcomposer.services.proxy.ModelIdentifier type="systemcomposer.services.proxy.ModelIdentifier" uuid="8bf417ba-4a4e-4e47-9c8b-d3a4159d371a">
+    <URI>TractionEmotorSoftwareArch_profiles</URI>
+    <modelType>PROFILE_MODEL</modelType>
+  </systemcomposer.services.proxy.ModelIdentifier>
   <systemcomposer.profile.DefaultStereotypePair type="systemcomposer.profile.DefaultStereotypePair" uuid="76a9b61c-32e6-4258-8add-e65a15856de7">
     <defaultStereotype type="systemcomposer.profile.Prototype" uuid="918bf319-f6ab-47f8-a5bb-b1c7464b312c"/>
     <key>component</key>
   </systemcomposer.profile.DefaultStereotypePair>
+  <systemcomposer.services.proxy.ModelResolver type="systemcomposer.services.proxy.ModelResolver" uuid="f29a1935-6cd3-4d95-8b63-12bbd05368ca">
+    <Proxies type="systemcomposer.services.proxy.UnidirectionalProxy" uuid="21a2d298-e035-4bc6-a289-25de08558587">
+      <Source type="systemcomposer.services.proxy.ProxySource" uuid="30b63143-03b3-40e4-b83a-8cc05345fec4"/>
+      <TargetId>47408790-2ad7-46fb-9be6-4ef6270a54d3</TargetId>
+    </Proxies>
+    <Proxies type="systemcomposer.services.proxy.BidirectionalProxy" uuid="a1fac9c3-5120-41a5-9daf-9995b9cac2f4">
+      <Source type="systemcomposer.services.proxy.ProxySource" uuid="abb1c88c-da88-47bd-977d-eeffb1c339c6"/>
+      <TargetId>8bc0b6f4-fe6b-4d96-af1f-a5b634a84d33</TargetId>
+    </Proxies>
+    <Proxies type="systemcomposer.services.proxy.UnidirectionalProxy" uuid="1ed6d787-5507-443c-992b-911b6eb0c99f">
+      <Source type="systemcomposer.services.proxy.ProxySource" uuid="9496da94-6378-4f67-b8a2-b8d2678c1f29"/>
+      <TargetId>e9b8e20d-2e05-4429-a100-917c2124c9d7</TargetId>
+    </Proxies>
+  </systemcomposer.services.proxy.ModelResolver>
   <systemcomposer.profile.DefaultStereotypePair type="systemcomposer.profile.DefaultStereotypePair" uuid="f28fc641-a9b8-46fc-bdd6-1eb944493d38">
     <defaultStereotype type="systemcomposer.profile.Prototype" uuid="918bf319-f6ab-47f8-a5bb-b1c7464b312c"/>
     <key>component</key>
   </systemcomposer.profile.DefaultStereotypePair>
+  <systemcomposer.services.proxy.WorkspaceWrapper type="systemcomposer.services.proxy.WorkspaceWrapper" uuid="bf6bccf1-ec54-4b41-8f6f-1737a022e93c"/>
 </MF0>
