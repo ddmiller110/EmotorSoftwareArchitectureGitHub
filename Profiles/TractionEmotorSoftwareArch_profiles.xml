@@ -1,0 +1,843 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MF0 version="1.1" packageUris="http://schema.mathworks.com/mf0/meta/19700101 http://schema.mathworks.com/mf0/systemcomposer_property/2.13 http://schema.mathworks.com/mf0/systemcomposer_services_proxy/1.2">
+  <systemcomposer.profile.Profile type="systemcomposer.profile.Profile" uuid="0c7eb0a5-142d-4ff2-86ac-6fe3874800e7">
+    <prototypes type="systemcomposer.profile.Prototype" uuid="918bf319-f6ab-47f8-a5bb-b1c7464b312c">
+      <appliesTo>Component</appliesTo>
+      <p_Name>Algorithm_Component</p_Name>
+      <defaultStereotypeMap type="systemcomposer.profile.DefaultStereotypeMap" uuid="e185a835-38c7-472a-a8e0-1acfbd1140e8"/>
+      <propertySet type="systemcomposer.property.PropertySet" uuid="90c1ce07-268f-486f-8231-774addbc351c">
+        <p_Name>Algorithm_Component</p_Name>
+        <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="4d078632-ea41-4518-b3ea-cd31e41f77b3"/>
+      </propertySet>
+      <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="36fa9d1b-3464-4aab-8959-103af23c261d"/>
+    </prototypes>
+    <prototypes type="systemcomposer.profile.Prototype" uuid="3884b0db-92c5-4e10-bf4d-fe5ddb023c72">
+      <componentHeaderColor type="systemcomposer.profile.RGBValueStruct">
+        <BLUE>255</BLUE>
+        <RED>255</RED>
+      </componentHeaderColor>
+      <p_Name>CIDC</p_Name>
+      <defaultStereotypeMap type="systemcomposer.profile.DefaultStereotypeMap" uuid="13ee6777-a1a6-4ffd-90b1-eb1939c55b3a"/>
+      <parentProxy type="systemcomposer.services.proxy.ProxySource" uuid="90434e30-5107-4779-86db-813e26879764">
+        <Proxy type="systemcomposer.services.proxy.BidirectionalProxy" uuid="4a119dd7-8f91-46f3-b08c-a19f439b86d8"/>
+        <realElement type="systemcomposer.profile.Prototype" uuid="3884b0db-92c5-4e10-bf4d-fe5ddb023c72"/>
+      </parentProxy>
+      <propertySet type="systemcomposer.property.PropertySet" uuid="fb046efb-ea3b-4e3d-b51b-16ed033b621c">
+        <p_Name>Stereotype</p_Name>
+        <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="83a4ccfe-d744-4c4e-9b11-a59e48523245"/>
+      </propertySet>
+      <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="0bcc1dce-6ee9-46e6-9244-54847f87049d"/>
+    </prototypes>
+    <prototypes type="systemcomposer.profile.Prototype" uuid="d37887c4-1b14-4f0c-b93c-dc338ccec8a4">
+      <appliesTo>Port</appliesTo>
+      <connectorLineColor type="systemcomposer.profile.RGBValueStruct">
+        <BLUE>255</BLUE>
+        <RED>255</RED>
+      </connectorLineColor>
+      <connectorLineStyle>DASH_DOT</connectorLineStyle>
+      <p_Name>CIDC_DataBus</p_Name>
+      <defaultStereotypeMap type="systemcomposer.profile.DefaultStereotypeMap" uuid="cf2c82f6-3d78-4a12-b960-0c8810ace82c"/>
+      <parentProxy type="systemcomposer.services.proxy.ProxySource" uuid="cb83f6d6-bcbd-44a2-b445-0bf541573faf">
+        <Proxy type="systemcomposer.services.proxy.BidirectionalProxy" uuid="8a2df0a7-de30-48cd-a088-1c86aa10055c"/>
+        <realElement type="systemcomposer.profile.Prototype" uuid="d37887c4-1b14-4f0c-b93c-dc338ccec8a4"/>
+      </parentProxy>
+      <propertySet type="systemcomposer.property.PropertySet" uuid="e617011b-7cf4-47f7-9b2e-4978b4626fb9">
+        <p_Name>Stereotype</p_Name>
+        <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="75d72fe4-878d-4909-ad76-ff64497fce43"/>
+      </propertySet>
+      <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="88652b81-473f-4fd6-ab3b-2ebcfee46d9e"/>
+    </prototypes>
+    <prototypes type="systemcomposer.profile.Prototype" uuid="49a25d34-f754-470f-9813-5e28cb45c619">
+      <componentHeaderColor type="systemcomposer.profile.RGBValueStruct">
+        <BLUE>166</BLUE>
+        <GREEN>166</GREEN>
+        <RED>166</RED>
+      </componentHeaderColor>
+      <p_Name>CRFC_Current_Regulation_and_Feedback</p_Name>
+      <defaultStereotypeMap type="systemcomposer.profile.DefaultStereotypeMap" uuid="f12736c4-3301-450f-bfff-02f4ccc4889a"/>
+      <parentProxy type="systemcomposer.services.proxy.ProxySource" uuid="91d68ddd-1ec4-4540-abe5-817e6b75453a">
+        <Proxy type="systemcomposer.services.proxy.BidirectionalProxy" uuid="367eeabd-e5e0-41ae-918e-0617396fd2cd"/>
+        <realElement type="systemcomposer.profile.Prototype" uuid="49a25d34-f754-470f-9813-5e28cb45c619"/>
+      </parentProxy>
+      <propertySet type="systemcomposer.property.PropertySet" uuid="bdf7e510-8b3c-417b-a48b-3de42e1e76a4">
+        <p_Name>Stereotype</p_Name>
+        <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="d152d121-ef8b-42cf-a422-d02f01c68d69"/>
+      </propertySet>
+      <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="a9e2a8f8-c7b6-46c3-9964-179294e0060c"/>
+    </prototypes>
+    <prototypes type="systemcomposer.profile.Prototype" uuid="71964065-5f3f-4f90-904f-9c76f69dcec5">
+      <appliesTo>Port</appliesTo>
+      <connectorLineColor type="systemcomposer.profile.RGBValueStruct">
+        <BLUE>15</BLUE>
+        <GREEN>221</GREEN>
+        <RED>221</RED>
+      </connectorLineColor>
+      <p_Name>CRFC_DataBus</p_Name>
+      <defaultStereotypeMap type="systemcomposer.profile.DefaultStereotypeMap" uuid="7fc1454e-6108-41e9-b0b3-b0098c6d768f"/>
+      <propertySet type="systemcomposer.property.PropertySet" uuid="1e3e6d5d-83a2-4680-aa30-4774dab65351">
+        <p_Name>Stereotype</p_Name>
+        <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="28d189e8-874d-4709-bba5-17ba7fb46395"/>
+      </propertySet>
+      <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="56ef1d87-bde9-4a92-b593-029898ecbe6f"/>
+    </prototypes>
+    <prototypes type="systemcomposer.profile.Prototype" uuid="f798049c-a213-426d-b425-168e96cac547">
+      <componentHeaderColor type="systemcomposer.profile.RGBValueStruct">
+        <BLUE>102</BLUE>
+        <GREEN>51</GREEN>
+      </componentHeaderColor>
+      <p_Name>CSOC_Current_Sensor_Offset_Calibration</p_Name>
+      <defaultStereotypeMap type="systemcomposer.profile.DefaultStereotypeMap" uuid="f89fc10e-d5c8-4778-a7b4-00e308033c33"/>
+      <parentProxy type="systemcomposer.services.proxy.ProxySource" uuid="2342af6e-e681-4995-8663-487a0316a494">
+        <Proxy type="systemcomposer.services.proxy.BidirectionalProxy" uuid="367eeabd-e5e0-41ae-918e-0617396fd2cd"/>
+        <realElement type="systemcomposer.profile.Prototype" uuid="f798049c-a213-426d-b425-168e96cac547"/>
+      </parentProxy>
+      <propertySet type="systemcomposer.property.PropertySet" uuid="a864c466-16c1-44e7-8296-6c90a98bf9cd">
+        <p_Name>Stereotype</p_Name>
+        <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="e7192d71-35ab-406f-ae3e-a5cea177918e"/>
+      </propertySet>
+      <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="142b8720-7cc7-421b-b961-431c30931f4c"/>
+    </prototypes>
+    <prototypes type="systemcomposer.profile.Prototype" uuid="ca419fd0-d14d-42d5-8639-5cdaadfa68eb">
+      <appliesTo>Port</appliesTo>
+      <connectorLineColor type="systemcomposer.profile.RGBValueStruct">
+        <BLUE>102</BLUE>
+        <GREEN>51</GREEN>
+      </connectorLineColor>
+      <p_Name>CSOC_DataBus</p_Name>
+      <defaultStereotypeMap type="systemcomposer.profile.DefaultStereotypeMap" uuid="9abbe7fb-67e2-4c8e-ba2f-b47fa23e6b4a"/>
+      <parentProxy type="systemcomposer.services.proxy.ProxySource" uuid="532f6f5d-fb4f-4864-8865-f90d3e848b67">
+        <Proxy type="systemcomposer.services.proxy.BidirectionalProxy" uuid="8a2df0a7-de30-48cd-a088-1c86aa10055c"/>
+        <realElement type="systemcomposer.profile.Prototype" uuid="ca419fd0-d14d-42d5-8639-5cdaadfa68eb"/>
+      </parentProxy>
+      <propertySet type="systemcomposer.property.PropertySet" uuid="3b5c7444-60ce-44db-8523-9018958b2546">
+        <p_Name>Stereotype</p_Name>
+        <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="c9e0c011-3321-40db-9fc4-b0d584845ea4"/>
+      </propertySet>
+      <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="b4516c63-81c6-4e59-b187-a99b67b101c1"/>
+    </prototypes>
+    <prototypes type="systemcomposer.profile.Prototype" uuid="e1da4e4f-467a-4fdc-afe5-374edb94785e">
+      <componentHeaderColor type="systemcomposer.profile.RGBValueStruct">
+        <BLUE>95</BLUE>
+        <GREEN>212</GREEN>
+        <RED>245</RED>
+      </componentHeaderColor>
+      <p_Name>DQRC_DQ_Current_Reference</p_Name>
+      <defaultStereotypeMap type="systemcomposer.profile.DefaultStereotypeMap" uuid="ce1f6545-fde6-4957-9584-19c4ab9b9024"/>
+      <parentProxy type="systemcomposer.services.proxy.ProxySource" uuid="38ca4230-7ba0-4db9-97f9-bba563738d29">
+        <Proxy type="systemcomposer.services.proxy.BidirectionalProxy" uuid="367eeabd-e5e0-41ae-918e-0617396fd2cd"/>
+        <realElement type="systemcomposer.profile.Prototype" uuid="e1da4e4f-467a-4fdc-afe5-374edb94785e"/>
+      </parentProxy>
+      <propertySet type="systemcomposer.property.PropertySet" uuid="667cea34-4de7-4852-9065-7a76da978aa9">
+        <p_Name>Stereotype</p_Name>
+        <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="5c73ff69-aa01-437d-8427-896d87858dfb"/>
+      </propertySet>
+      <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="f4a19d78-aba4-43ca-9e4f-16084d62014e"/>
+    </prototypes>
+    <prototypes type="systemcomposer.profile.Prototype" uuid="7a0cb9b1-4a8f-4fac-b38e-4ca30a592e89">
+      <appliesTo>Port</appliesTo>
+      <connectorLineColor type="systemcomposer.profile.RGBValueStruct">
+        <BLUE>63</BLUE>
+        <GREEN>63</GREEN>
+        <RED>63</RED>
+      </connectorLineColor>
+      <p_Name>DQRC_DataBus</p_Name>
+      <defaultStereotypeMap type="systemcomposer.profile.DefaultStereotypeMap" uuid="4ba8755d-7d6d-45a9-9d70-2ea3a2d8f61d"/>
+      <parentProxy type="systemcomposer.services.proxy.ProxySource" uuid="2435510c-bd9a-40c3-90ad-5aff4f5d657e">
+        <Proxy type="systemcomposer.services.proxy.BidirectionalProxy" uuid="8a2df0a7-de30-48cd-a088-1c86aa10055c"/>
+        <realElement type="systemcomposer.profile.Prototype" uuid="7a0cb9b1-4a8f-4fac-b38e-4ca30a592e89"/>
+      </parentProxy>
+      <propertySet type="systemcomposer.property.PropertySet" uuid="706b08a5-138c-4c54-ba64-d94f870cf175">
+        <p_Name>Stereotype</p_Name>
+        <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="6b309ad5-db27-4c3e-a672-0a703773bfcb"/>
+      </propertySet>
+      <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="32518b3c-c4e9-4462-8009-c0c87821d46c"/>
+    </prototypes>
+    <prototypes type="systemcomposer.profile.Prototype" uuid="65df0de1-713c-42a4-94ca-dfff2d16d89f">
+      <p_Name>DataBus</p_Name>
+      <defaultStereotypeMap type="systemcomposer.profile.DefaultStereotypeMap" uuid="75a7367f-1256-49ca-b0b8-eec40f2590ab"/>
+      <propertySet type="systemcomposer.property.PropertySet" uuid="122351c6-2f82-4347-a204-2771ee300dff">
+        <p_Name>Stereotype</p_Name>
+        <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="7a5e78a1-0981-4ed1-9d88-976f1c5c083a"/>
+      </propertySet>
+      <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="86e4cd86-c52e-430a-8945-d0ae66c65e32"/>
+    </prototypes>
+    <prototypes type="systemcomposer.profile.Prototype" uuid="71fc45b2-276e-4fcc-b7e8-a300d90315c3">
+      <appliesTo>Component</appliesTo>
+      <p_Name>Diagnostic_Component</p_Name>
+      <defaultStereotypeMap type="systemcomposer.profile.DefaultStereotypeMap" uuid="601cc1e9-d4f0-40b0-8dda-3cde623b3445"/>
+      <metaAttributes type="mf.zero.meta.AttributeMap" uuid="23f39ed8-3ad2-4e87-be86-12f8caf3e9e8"/>
+      <propertySet type="systemcomposer.property.PropertySet" uuid="28b9439d-eec5-42d3-8d2a-fcd9218be858">
+        <p_Name>Diagnostic_Component</p_Name>
+        <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="80b77f69-9e37-476c-bea4-0e137d115795"/>
+      </propertySet>
+      <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="10d77e61-fe6d-48c0-8b17-ed11a1363085"/>
+    </prototypes>
+    <prototypes type="systemcomposer.profile.Prototype" uuid="4123cddb-7ed5-4115-a632-6408b5063fee">
+      <componentHeaderColor type="systemcomposer.profile.RGBValueStruct">
+        <GREEN>153</GREEN>
+        <RED>153</RED>
+      </componentHeaderColor>
+      <p_Name>IHDC</p_Name>
+      <defaultStereotypeMap type="systemcomposer.profile.DefaultStereotypeMap" uuid="1311427f-c130-4125-803a-3dc1506f9820"/>
+      <parentProxy type="systemcomposer.services.proxy.ProxySource" uuid="2678bf24-f9fb-4a86-a11d-2fdcd151810d">
+        <Proxy type="systemcomposer.services.proxy.BidirectionalProxy" uuid="4a119dd7-8f91-46f3-b08c-a19f439b86d8"/>
+        <realElement type="systemcomposer.profile.Prototype" uuid="4123cddb-7ed5-4115-a632-6408b5063fee"/>
+      </parentProxy>
+      <propertySet type="systemcomposer.property.PropertySet" uuid="046ae0e3-cf28-485e-adf2-5c90a29fb1c2">
+        <p_Name>Stereotype</p_Name>
+        <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="bffc9f00-7ff8-493a-be86-4e6f66214e52"/>
+      </propertySet>
+      <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="7c4645eb-35d2-42e3-9393-30dfa172b189"/>
+    </prototypes>
+    <prototypes type="systemcomposer.profile.Prototype" uuid="e73e4721-1d4e-45d8-a95c-2ee7ccc282d9">
+      <appliesTo>Port</appliesTo>
+      <connectorLineColor type="systemcomposer.profile.RGBValueStruct">
+        <GREEN>153</GREEN>
+        <RED>153</RED>
+      </connectorLineColor>
+      <connectorLineStyle>DASH_DOT</connectorLineStyle>
+      <p_Name>IHDC_DataBus</p_Name>
+      <defaultStereotypeMap type="systemcomposer.profile.DefaultStereotypeMap" uuid="ccefd98f-d580-443f-9957-89057215b091"/>
+      <parentProxy type="systemcomposer.services.proxy.ProxySource" uuid="e6151e6b-7b84-41b6-b219-54074c74c33d">
+        <Proxy type="systemcomposer.services.proxy.BidirectionalProxy" uuid="8a2df0a7-de30-48cd-a088-1c86aa10055c"/>
+        <realElement type="systemcomposer.profile.Prototype" uuid="e73e4721-1d4e-45d8-a95c-2ee7ccc282d9"/>
+      </parentProxy>
+      <propertySet type="systemcomposer.property.PropertySet" uuid="42a30968-4110-4d5a-a544-8a18acc5f2aa">
+        <p_Name>Stereotype</p_Name>
+        <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="56811f32-5da7-4228-9b43-3012747df04e"/>
+      </propertySet>
+      <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="4e33df46-3a03-416e-b6e3-b4ba25b217da"/>
+    </prototypes>
+    <prototypes type="systemcomposer.profile.Prototype" uuid="83241231-cf94-41c9-946b-56a541e0944c">
+      <componentHeaderColor type="systemcomposer.profile.RGBValueStruct">
+        <BLUE>51</BLUE>
+        <GREEN>51</GREEN>
+        <RED>255</RED>
+      </componentHeaderColor>
+      <p_Name>MFDC</p_Name>
+      <defaultStereotypeMap type="systemcomposer.profile.DefaultStereotypeMap" uuid="9718efe2-f2f4-48fa-8783-9f1da177403e"/>
+      <parentProxy type="systemcomposer.services.proxy.ProxySource" uuid="b3a3830c-76c9-403e-9ef0-eea0753ffad7">
+        <Proxy type="systemcomposer.services.proxy.BidirectionalProxy" uuid="4a119dd7-8f91-46f3-b08c-a19f439b86d8"/>
+        <realElement type="systemcomposer.profile.Prototype" uuid="83241231-cf94-41c9-946b-56a541e0944c"/>
+      </parentProxy>
+      <propertySet type="systemcomposer.property.PropertySet" uuid="37e6ec95-7526-4db4-9520-ff4cc91a78a8">
+        <p_Name>Stereotype</p_Name>
+        <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="01ce0d59-cfbc-426a-811f-44ab56d58fb4"/>
+      </propertySet>
+      <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="a71edfdd-f11e-4724-8593-6bb966c0bfb6"/>
+    </prototypes>
+    <prototypes type="systemcomposer.profile.Prototype" uuid="fa8b0787-9373-4bed-a17f-4746b22cd793">
+      <appliesTo>Port</appliesTo>
+      <connectorLineColor type="systemcomposer.profile.RGBValueStruct">
+        <BLUE>51</BLUE>
+        <GREEN>51</GREEN>
+        <RED>255</RED>
+      </connectorLineColor>
+      <connectorLineStyle>DASH_DOT</connectorLineStyle>
+      <p_Name>MFDC_DataBus</p_Name>
+      <defaultStereotypeMap type="systemcomposer.profile.DefaultStereotypeMap" uuid="60682bc5-71a6-4e68-99b5-96f4e6387a4c"/>
+      <parentProxy type="systemcomposer.services.proxy.ProxySource" uuid="e3e14c23-3066-416d-97ad-a0375b71e50a">
+        <Proxy type="systemcomposer.services.proxy.BidirectionalProxy" uuid="8a2df0a7-de30-48cd-a088-1c86aa10055c"/>
+        <realElement type="systemcomposer.profile.Prototype" uuid="fa8b0787-9373-4bed-a17f-4746b22cd793"/>
+      </parentProxy>
+      <propertySet type="systemcomposer.property.PropertySet" uuid="6de0c530-3076-4ac3-a5ee-d28033f4b44d">
+        <p_Name>Stereotype</p_Name>
+        <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="16b9839c-1f85-4413-b3f2-ad4cc4ff9ed5"/>
+      </propertySet>
+      <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="e67b8f09-f881-4c46-b1f1-7b8fe4984b62"/>
+    </prototypes>
+    <prototypes type="systemcomposer.profile.Prototype" uuid="8112b448-c656-49b6-b5f7-588c56c972dd">
+      <appliesTo>Port</appliesTo>
+      <connectorLineColor type="systemcomposer.profile.RGBValueStruct">
+        <BLUE>142</BLUE>
+        <GREEN>47</GREEN>
+        <RED>126</RED>
+      </connectorLineColor>
+      <p_Name>PSCC_DataBus</p_Name>
+      <defaultStereotypeMap type="systemcomposer.profile.DefaultStereotypeMap" uuid="bac857bc-4c06-44ff-9044-05690a445ff8"/>
+      <parentProxy type="systemcomposer.services.proxy.ProxySource" uuid="0e491bb3-35fb-41a1-8c70-37290f041aaa">
+        <Proxy type="systemcomposer.services.proxy.BidirectionalProxy" uuid="8a2df0a7-de30-48cd-a088-1c86aa10055c"/>
+        <realElement type="systemcomposer.profile.Prototype" uuid="8112b448-c656-49b6-b5f7-588c56c972dd"/>
+      </parentProxy>
+      <propertySet type="systemcomposer.property.PropertySet" uuid="d089826d-31fd-408c-9f21-c92258f3cace">
+        <p_Name>Stereotype</p_Name>
+        <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="36e10992-494e-4c7d-a91e-93c9cb44e5c4"/>
+      </propertySet>
+      <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="3aae0a3c-c316-48ba-981c-5433471d36bb"/>
+    </prototypes>
+    <prototypes type="systemcomposer.profile.Prototype" uuid="083d9112-033d-4d65-b520-dee9700c24a7">
+      <componentHeaderColor type="systemcomposer.profile.RGBValueStruct">
+        <BLUE>142</BLUE>
+        <GREEN>47</GREEN>
+        <RED>126</RED>
+      </componentHeaderColor>
+      <p_Name>PSCC_Position_and_Speed_Calculation</p_Name>
+      <defaultStereotypeMap type="systemcomposer.profile.DefaultStereotypeMap" uuid="5c326b9e-ed38-477f-891a-0bd2bd62b8dd"/>
+      <parentProxy type="systemcomposer.services.proxy.ProxySource" uuid="a9855942-8143-4e94-aa80-b0a5c9b2fefb">
+        <Proxy type="systemcomposer.services.proxy.BidirectionalProxy" uuid="367eeabd-e5e0-41ae-918e-0617396fd2cd"/>
+        <realElement type="systemcomposer.profile.Prototype" uuid="083d9112-033d-4d65-b520-dee9700c24a7"/>
+      </parentProxy>
+      <propertySet type="systemcomposer.property.PropertySet" uuid="fa5e2d7b-7fa9-4b00-b579-6ae1892eca6a">
+        <p_Name>Stereotype</p_Name>
+        <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="3aefeadc-2904-49c6-ad04-0420d5d0987d"/>
+      </propertySet>
+      <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="4e6ca063-0cde-4bec-8107-bf1b1178fb09"/>
+    </prototypes>
+    <prototypes type="systemcomposer.profile.Prototype" uuid="9822d99d-e5da-48fe-85c5-c1c9035fa3e8">
+      <appliesTo>Port</appliesTo>
+      <connectorLineColor type="systemcomposer.profile.RGBValueStruct">
+        <BLUE>53</BLUE>
+        <GREEN>53</GREEN>
+        <RED>10</RED>
+      </connectorLineColor>
+      <p_Name>PWMC_DataBus</p_Name>
+      <defaultStereotypeMap type="systemcomposer.profile.DefaultStereotypeMap" uuid="5f151ad9-e215-4136-a097-65b8f9fb421f"/>
+      <parentProxy type="systemcomposer.services.proxy.ProxySource" uuid="3c7cd0f8-1f3d-45b3-a778-bf9455540c19">
+        <Proxy type="systemcomposer.services.proxy.BidirectionalProxy" uuid="8a2df0a7-de30-48cd-a088-1c86aa10055c"/>
+        <realElement type="systemcomposer.profile.Prototype" uuid="9822d99d-e5da-48fe-85c5-c1c9035fa3e8"/>
+      </parentProxy>
+      <propertySet type="systemcomposer.property.PropertySet" uuid="ef90f074-8fa0-4418-9017-84b42372ff2e">
+        <p_Name>Stereotype</p_Name>
+        <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="0cb3512f-4df8-4e35-9194-f15b3b1047df"/>
+      </propertySet>
+      <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="b05ee57b-b531-45af-8c55-f4a2d812fca1"/>
+    </prototypes>
+    <prototypes type="systemcomposer.profile.Prototype" uuid="387313cf-f8d0-4bab-8bf7-18e7a83486ca">
+      <componentHeaderColor type="systemcomposer.profile.RGBValueStruct">
+        <BLUE>54</BLUE>
+        <GREEN>54</GREEN>
+        <RED>9</RED>
+      </componentHeaderColor>
+      <p_Name>PWMC_PWM_Generation</p_Name>
+      <defaultStereotypeMap type="systemcomposer.profile.DefaultStereotypeMap" uuid="04628ac9-091f-4b59-9ddc-d3082791abde"/>
+      <parentProxy type="systemcomposer.services.proxy.ProxySource" uuid="d0fe8c58-6394-46cf-a6b2-150b5ff48bb8">
+        <Proxy type="systemcomposer.services.proxy.BidirectionalProxy" uuid="367eeabd-e5e0-41ae-918e-0617396fd2cd"/>
+        <realElement type="systemcomposer.profile.Prototype" uuid="387313cf-f8d0-4bab-8bf7-18e7a83486ca"/>
+      </parentProxy>
+      <propertySet type="systemcomposer.property.PropertySet" uuid="fbe19008-1ba6-46f3-a250-abd15c3f92aa">
+        <p_Name>Stereotype</p_Name>
+        <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="aefae737-72e7-4047-8a8c-46f904da0f7a"/>
+      </propertySet>
+      <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="201e04c7-abb8-4176-becc-390f2e6d3490"/>
+    </prototypes>
+    <prototypes type="systemcomposer.profile.Prototype" uuid="0e45e47d-999d-4416-af6d-020f3028f725">
+      <componentHeaderColor type="systemcomposer.profile.RGBValueStruct">
+        <BLUE>177</BLUE>
+        <GREEN>198</GREEN>
+        <RED>244</RED>
+      </componentHeaderColor>
+      <p_Name>REDC</p_Name>
+      <defaultStereotypeMap type="systemcomposer.profile.DefaultStereotypeMap" uuid="bc8da5da-a2ae-4ec8-ad3a-74163308bcb7"/>
+      <parentProxy type="systemcomposer.services.proxy.ProxySource" uuid="55c4b6de-13cc-42b4-b8b0-b3b06ed0a450">
+        <Proxy type="systemcomposer.services.proxy.BidirectionalProxy" uuid="4a119dd7-8f91-46f3-b08c-a19f439b86d8"/>
+        <realElement type="systemcomposer.profile.Prototype" uuid="0e45e47d-999d-4416-af6d-020f3028f725"/>
+      </parentProxy>
+      <propertySet type="systemcomposer.property.PropertySet" uuid="bdc61279-3a77-4486-abd8-94dc9f02dbcb">
+        <p_Name>Stereotype</p_Name>
+        <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="f594d427-757a-41f2-893b-5d3520dcedab"/>
+      </propertySet>
+      <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="a133b8a0-5d82-4682-badd-c69570515011"/>
+    </prototypes>
+    <prototypes type="systemcomposer.profile.Prototype" uuid="d7786bcb-9fc9-4160-a548-d42c22af38df">
+      <appliesTo>Port</appliesTo>
+      <connectorLineColor type="systemcomposer.profile.RGBValueStruct">
+        <BLUE>25</BLUE>
+        <GREEN>83</GREEN>
+        <RED>217</RED>
+      </connectorLineColor>
+      <connectorLineStyle>DASH_DOT</connectorLineStyle>
+      <p_Name>REDC_DataBus</p_Name>
+      <defaultStereotypeMap type="systemcomposer.profile.DefaultStereotypeMap" uuid="dc0760a3-d307-4ff8-928c-67a855366f52"/>
+      <parentProxy type="systemcomposer.services.proxy.ProxySource" uuid="39d44b28-c8b4-4d05-8502-9169e6cbe862">
+        <Proxy type="systemcomposer.services.proxy.BidirectionalProxy" uuid="8a2df0a7-de30-48cd-a088-1c86aa10055c"/>
+        <realElement type="systemcomposer.profile.Prototype" uuid="d7786bcb-9fc9-4160-a548-d42c22af38df"/>
+      </parentProxy>
+      <propertySet type="systemcomposer.property.PropertySet" uuid="79812a83-0674-4e91-a0ac-e785fd6705e3">
+        <p_Name>Stereotype</p_Name>
+        <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="6d5a4c8d-5838-4dda-ac99-2800210068aa"/>
+      </propertySet>
+      <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="f4047181-f363-409b-8f6f-420e6d722f1c"/>
+    </prototypes>
+    <prototypes type="systemcomposer.profile.Prototype" uuid="c8140c26-6c1d-470d-9ed1-c8352b23d0f0">
+      <connectorLineColor type="systemcomposer.profile.RGBValueStruct">
+        <BLUE>255</BLUE>
+        <GREEN>153</GREEN>
+        <RED>102</RED>
+      </connectorLineColor>
+      <p_Name>ROCC_DataBus</p_Name>
+      <defaultStereotypeMap type="systemcomposer.profile.DefaultStereotypeMap" uuid="96ae4b01-5bea-4e6f-aad4-f53bc7edaba9"/>
+      <parentProxy type="systemcomposer.services.proxy.ProxySource" uuid="4d1155b3-6054-4d62-80cd-b15d6ca62e02">
+        <Proxy type="systemcomposer.services.proxy.BidirectionalProxy" uuid="6002fd57-685a-4c4a-8891-18b4b471e1be"/>
+        <realElement type="systemcomposer.profile.Prototype" uuid="c8140c26-6c1d-470d-9ed1-c8352b23d0f0"/>
+      </parentProxy>
+      <propertySet type="systemcomposer.property.PropertySet" uuid="f37054e5-c3d6-45bf-8cf0-c16f573f42be">
+        <p_Name>Stereotype</p_Name>
+        <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="3d927ef3-d07f-4234-8ab2-6997002330bd"/>
+      </propertySet>
+      <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="9f1db6ed-d86e-46fb-84f9-fea7ae50a744"/>
+    </prototypes>
+    <prototypes type="systemcomposer.profile.Prototype" uuid="3472c5b3-88b7-413a-a3ce-e43dc6f3dae4">
+      <componentHeaderColor type="systemcomposer.profile.RGBValueStruct">
+        <BLUE>255</BLUE>
+        <GREEN>153</GREEN>
+        <RED>102</RED>
+      </componentHeaderColor>
+      <p_Name>ROCC_Resolver_Offset_Calibration</p_Name>
+      <defaultStereotypeMap type="systemcomposer.profile.DefaultStereotypeMap" uuid="658f4bf5-2178-4bf3-9340-6a53f464e0c8"/>
+      <parentProxy type="systemcomposer.services.proxy.ProxySource" uuid="83f62c6b-648f-4c60-a681-d95407770b48">
+        <Proxy type="systemcomposer.services.proxy.BidirectionalProxy" uuid="367eeabd-e5e0-41ae-918e-0617396fd2cd"/>
+        <realElement type="systemcomposer.profile.Prototype" uuid="3472c5b3-88b7-413a-a3ce-e43dc6f3dae4"/>
+      </parentProxy>
+      <propertySet type="systemcomposer.property.PropertySet" uuid="a860c8ba-af91-4b97-b880-d35bc12cbec0">
+        <p_Name>Stereotype</p_Name>
+        <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="14187c33-290b-41c6-8112-372d50a7402f"/>
+      </propertySet>
+      <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="0021237a-47c6-49f5-87c1-f5de3bf539d4"/>
+    </prototypes>
+    <prototypes type="systemcomposer.profile.Prototype" uuid="d5e98a79-831c-4f23-bea5-9e0beb3e6352">
+      <appliesTo>Port</appliesTo>
+      <connectorLineColor type="systemcomposer.profile.RGBValueStruct">
+        <BLUE>255</BLUE>
+        <GREEN>255</GREEN>
+      </connectorLineColor>
+      <p_Name>SFCC_DataBus</p_Name>
+      <defaultStereotypeMap type="systemcomposer.profile.DefaultStereotypeMap" uuid="ef7e35b7-b98d-4475-ac7e-b5f897dbe44f"/>
+      <parentProxy type="systemcomposer.services.proxy.ProxySource" uuid="793369bf-3845-4d4e-a2ee-0b2e21802942">
+        <Proxy type="systemcomposer.services.proxy.BidirectionalProxy" uuid="8a2df0a7-de30-48cd-a088-1c86aa10055c"/>
+        <realElement type="systemcomposer.profile.Prototype" uuid="d5e98a79-831c-4f23-bea5-9e0beb3e6352"/>
+      </parentProxy>
+      <propertySet type="systemcomposer.property.PropertySet" uuid="7860c862-7dcc-44df-8c97-aedd57940a3c">
+        <p_Name>Stereotype</p_Name>
+        <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="5333d8c2-9f30-47c6-a122-16e4f3488063"/>
+      </propertySet>
+      <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="386ab734-5783-487e-b36b-9b59dc904bdc"/>
+    </prototypes>
+    <prototypes type="systemcomposer.profile.Prototype" uuid="39a0b454-e090-4efc-9367-da0f0345dd01">
+      <componentHeaderColor type="systemcomposer.profile.RGBValueStruct">
+        <BLUE>255</BLUE>
+        <GREEN>255</GREEN>
+      </componentHeaderColor>
+      <p_Name>SFCC_Switching_Frequency_Control</p_Name>
+      <defaultStereotypeMap type="systemcomposer.profile.DefaultStereotypeMap" uuid="a21bd8a5-ccf0-4151-aca7-d0bb906b68ba"/>
+      <parentProxy type="systemcomposer.services.proxy.ProxySource" uuid="5d9c9d3e-209a-457d-8a20-6bc7338fe43c">
+        <Proxy type="systemcomposer.services.proxy.BidirectionalProxy" uuid="367eeabd-e5e0-41ae-918e-0617396fd2cd"/>
+        <realElement type="systemcomposer.profile.Prototype" uuid="39a0b454-e090-4efc-9367-da0f0345dd01"/>
+      </parentProxy>
+      <propertySet type="systemcomposer.property.PropertySet" uuid="54ac30d1-30c1-4b7d-a9c5-d85e99059ee6">
+        <p_Name>Stereotype</p_Name>
+        <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="1b76272f-8ef9-4a21-aeaa-dc5d79ed9c27"/>
+      </propertySet>
+      <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="aaebed52-d4cc-438d-bc94-75cd5a79ec4f"/>
+    </prototypes>
+    <prototypes type="systemcomposer.profile.Prototype" uuid="a74e864f-ea3f-4627-802d-d425181d340b">
+      <appliesTo>Port</appliesTo>
+      <connectorLineColor type="systemcomposer.profile.RGBValueStruct">
+        <GREEN>255</GREEN>
+      </connectorLineColor>
+      <p_Name>SMDC_DataBus</p_Name>
+      <defaultStereotypeMap type="systemcomposer.profile.DefaultStereotypeMap" uuid="32e31775-fceb-4acd-a0cb-e0926b6900d3"/>
+      <parentProxy type="systemcomposer.services.proxy.ProxySource" uuid="827dce88-3272-44fd-90bf-4fdb1566fe2e">
+        <Proxy type="systemcomposer.services.proxy.BidirectionalProxy" uuid="8a2df0a7-de30-48cd-a088-1c86aa10055c"/>
+        <realElement type="systemcomposer.profile.Prototype" uuid="a74e864f-ea3f-4627-802d-d425181d340b"/>
+      </parentProxy>
+      <propertySet type="systemcomposer.property.PropertySet" uuid="42e80732-a6a0-45de-af9e-47dc3cb51c6a">
+        <p_Name>Stereotype</p_Name>
+        <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="d590ae95-bd28-4810-91d0-d232aa5d1350"/>
+      </propertySet>
+      <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="fa6f363c-67bf-436e-bace-22f38f84bc6f"/>
+    </prototypes>
+    <prototypes type="systemcomposer.profile.Prototype" uuid="118e314a-ebe4-436f-b2d2-4e7cc05c57ac">
+      <componentHeaderColor type="systemcomposer.profile.RGBValueStruct">
+        <GREEN>255</GREEN>
+      </componentHeaderColor>
+      <p_Name>SMDC_System_Mode_Determination</p_Name>
+      <defaultStereotypeMap type="systemcomposer.profile.DefaultStereotypeMap" uuid="409859b6-4a6f-4f70-8a25-c2502658cba0"/>
+      <parentProxy type="systemcomposer.services.proxy.ProxySource" uuid="08b506a7-b619-4925-80fa-654b4eb05460">
+        <Proxy type="systemcomposer.services.proxy.BidirectionalProxy" uuid="367eeabd-e5e0-41ae-918e-0617396fd2cd"/>
+        <realElement type="systemcomposer.profile.Prototype" uuid="118e314a-ebe4-436f-b2d2-4e7cc05c57ac"/>
+      </parentProxy>
+      <propertySet type="systemcomposer.property.PropertySet" uuid="1e9056e9-94d4-4853-a7a1-99aa0671b797">
+        <p_Name>Stereotype</p_Name>
+        <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="28e26f3a-56d2-420b-8d50-b0b7e13781af"/>
+      </propertySet>
+      <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="718b5c54-2f3c-45e4-b886-a7d7a55b8b8f"/>
+    </prototypes>
+    <prototypes type="systemcomposer.profile.Prototype" uuid="80fd40b9-44fa-4c74-bc7e-ee8d26e03934">
+      <componentHeaderColor type="systemcomposer.profile.RGBValueStruct">
+        <BLUE>184</BLUE>
+        <GREEN>228</GREEN>
+        <RED>210</RED>
+      </componentHeaderColor>
+      <p_Name>STDC</p_Name>
+      <defaultStereotypeMap type="systemcomposer.profile.DefaultStereotypeMap" uuid="22ca4091-78d1-4eb7-8d77-3c91412e1863"/>
+      <parentProxy type="systemcomposer.services.proxy.ProxySource" uuid="149baa6b-cb6d-42e5-9b6e-767654c1ccee">
+        <Proxy type="systemcomposer.services.proxy.BidirectionalProxy" uuid="4a119dd7-8f91-46f3-b08c-a19f439b86d8"/>
+        <realElement type="systemcomposer.profile.Prototype" uuid="80fd40b9-44fa-4c74-bc7e-ee8d26e03934"/>
+      </parentProxy>
+      <propertySet type="systemcomposer.property.PropertySet" uuid="136eb774-63b6-42dd-885d-014f3a645a9a">
+        <p_Name>Stereotype</p_Name>
+        <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="d561d922-4361-410a-935b-d0d610916b15"/>
+      </propertySet>
+      <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="11b2379e-fb86-4785-b56d-5bd6312bc8a3"/>
+    </prototypes>
+    <prototypes type="systemcomposer.profile.Prototype" uuid="adc4ece8-2e29-463a-9833-e200439c599c">
+      <appliesTo>Port</appliesTo>
+      <connectorLineColor type="systemcomposer.profile.RGBValueStruct">
+        <BLUE>48</BLUE>
+        <GREEN>172</GREEN>
+        <RED>119</RED>
+      </connectorLineColor>
+      <connectorLineStyle>DASH_DOT</connectorLineStyle>
+      <p_Name>STDC_DataBus</p_Name>
+      <defaultStereotypeMap type="systemcomposer.profile.DefaultStereotypeMap" uuid="b40724cb-f55a-46ca-aa44-de2ba60fdbfb"/>
+      <parentProxy type="systemcomposer.services.proxy.ProxySource" uuid="4f9c74b9-ecad-4267-abe4-bc2b55047553">
+        <Proxy type="systemcomposer.services.proxy.BidirectionalProxy" uuid="8a2df0a7-de30-48cd-a088-1c86aa10055c"/>
+        <realElement type="systemcomposer.profile.Prototype" uuid="adc4ece8-2e29-463a-9833-e200439c599c"/>
+      </parentProxy>
+      <propertySet type="systemcomposer.property.PropertySet" uuid="982eac13-4a62-48e9-9344-9395f6541198">
+        <p_Name>Stereotype</p_Name>
+        <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="4995df00-42e2-4718-aea7-173f21e2da8d"/>
+      </propertySet>
+      <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="1dead804-2d7c-4bd6-8dfe-733a02e86218"/>
+    </prototypes>
+    <prototypes type="systemcomposer.profile.Prototype" uuid="ddae3e90-6644-4677-8b5b-b8e6c28183ad">
+      <appliesTo>Port</appliesTo>
+      <connectorLineColor type="systemcomposer.profile.RGBValueStruct">
+        <BLUE>86</BLUE>
+        <GREEN>113</GREEN>
+        <RED>59</RED>
+      </connectorLineColor>
+      <p_Name>STMC_DataBus</p_Name>
+      <defaultStereotypeMap type="systemcomposer.profile.DefaultStereotypeMap" uuid="d5bec8c0-84cb-4ba2-96b0-d89fc2129cc2"/>
+      <parentProxy type="systemcomposer.services.proxy.ProxySource" uuid="5257290e-a3b6-419d-b2d1-1c9613c43a08">
+        <Proxy type="systemcomposer.services.proxy.BidirectionalProxy" uuid="8a2df0a7-de30-48cd-a088-1c86aa10055c"/>
+        <realElement type="systemcomposer.profile.Prototype" uuid="ddae3e90-6644-4677-8b5b-b8e6c28183ad"/>
+      </parentProxy>
+      <propertySet type="systemcomposer.property.PropertySet" uuid="5981144c-e92d-47a4-9b9b-210fbf8e35f3">
+        <p_Name>Stereotype</p_Name>
+        <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="c895c7b6-450b-4cc5-a7bd-47fe417a3027"/>
+      </propertySet>
+      <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="5335c7fe-1fba-49c8-a4c7-acbaaeeeddc0"/>
+    </prototypes>
+    <prototypes type="systemcomposer.profile.Prototype" uuid="ebecd512-3c7b-48f8-bbd8-5dbdcd5923c5">
+      <componentHeaderColor type="systemcomposer.profile.RGBValueStruct">
+        <BLUE>86</BLUE>
+        <GREEN>113</GREEN>
+        <RED>59</RED>
+      </componentHeaderColor>
+      <p_Name>STMC_Speed_and_Torque_Mode</p_Name>
+      <defaultStereotypeMap type="systemcomposer.profile.DefaultStereotypeMap" uuid="24b45e70-5f69-43f0-96e1-3cf9f824f850"/>
+      <parentProxy type="systemcomposer.services.proxy.ProxySource" uuid="ef2578d8-938e-4e8e-a08e-64c6e1732f50">
+        <Proxy type="systemcomposer.services.proxy.BidirectionalProxy" uuid="367eeabd-e5e0-41ae-918e-0617396fd2cd"/>
+        <realElement type="systemcomposer.profile.Prototype" uuid="ebecd512-3c7b-48f8-bbd8-5dbdcd5923c5"/>
+      </parentProxy>
+      <propertySet type="systemcomposer.property.PropertySet" uuid="21c73ea7-f65f-4f27-b9f7-34ce511efccd">
+        <p_Name>Stereotype</p_Name>
+        <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="19a3f6f6-f8ea-44ad-8d5b-cf137b4363a5"/>
+      </propertySet>
+      <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="7189127d-566c-44ba-b15a-b4ed991bb9bd"/>
+    </prototypes>
+    <prototypes type="systemcomposer.profile.Prototype" uuid="4a08a09c-4845-496c-91d7-7130c73638d2">
+      <appliesTo>Port</appliesTo>
+      <componentHeaderColor type="systemcomposer.profile.RGBValueStruct">
+        <BLUE>210</BLUE>
+        <GREEN>210</GREEN>
+        <RED>210</RED>
+      </componentHeaderColor>
+      <p_Name>SignalSamplingTs_100us</p_Name>
+      <defaultStereotypeMap type="systemcomposer.profile.DefaultStereotypeMap" uuid="fcd49e5f-cb9c-4fd1-8288-1d8829e9fbbb"/>
+      <propertySet type="systemcomposer.property.PropertySet" uuid="3eef69bc-ad8e-40fc-a074-26b9ab9180b2">
+        <p_Name>Stereotype</p_Name>
+        <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="d4073548-390f-4d9d-a828-87cf9b2ef5a5"/>
+      </propertySet>
+      <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="8100fcc3-b914-4b9c-a71d-45fcb0db896c"/>
+    </prototypes>
+    <prototypes type="systemcomposer.profile.Prototype" uuid="06acba14-cd1d-45f5-9ffa-14f4ecaeec14">
+      <appliesTo>Port</appliesTo>
+      <connectorLineColor type="systemcomposer.profile.RGBValueStruct">
+        <BLUE>168</BLUE>
+        <GREEN>168</GREEN>
+        <RED>168</RED>
+      </connectorLineColor>
+      <p_Name>SignalSamplingTs_2ms</p_Name>
+      <defaultStereotypeMap type="systemcomposer.profile.DefaultStereotypeMap" uuid="cc6aa67f-5dc7-40bb-9077-af8f352ae7e3"/>
+      <propertySet type="systemcomposer.property.PropertySet" uuid="118831f0-a9e1-460c-ad82-cf0851b2cb4f">
+        <p_Name>Stereotype</p_Name>
+        <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="27d27135-a914-4d5e-b93a-ef0cd07cd370"/>
+      </propertySet>
+      <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="00f2b59b-cc35-49c1-ace7-2ac97cdf2d96"/>
+    </prototypes>
+    <prototypes type="systemcomposer.profile.Prototype" uuid="e69264b7-eacb-4778-a216-1080dbf9e6b0">
+      <appliesTo>Port</appliesTo>
+      <connectorLineColor type="systemcomposer.profile.RGBValueStruct">
+        <BLUE>67</BLUE>
+        <GREEN>67</GREEN>
+        <RED>115</RED>
+      </connectorLineColor>
+      <p_Name>TAEC_DataBus</p_Name>
+      <defaultStereotypeMap type="systemcomposer.profile.DefaultStereotypeMap" uuid="8da32c27-7927-4bb7-9eae-5564ac3b099c"/>
+      <parentProxy type="systemcomposer.services.proxy.ProxySource" uuid="cbfbcb8c-d1d4-4f39-a249-1c62b87a5d7f">
+        <Proxy type="systemcomposer.services.proxy.BidirectionalProxy" uuid="8a2df0a7-de30-48cd-a088-1c86aa10055c"/>
+        <realElement type="systemcomposer.profile.Prototype" uuid="e69264b7-eacb-4778-a216-1080dbf9e6b0"/>
+      </parentProxy>
+      <propertySet type="systemcomposer.property.PropertySet" uuid="0518559c-ccac-435a-a82e-bf45fe5485f2">
+        <p_Name>Stereotype</p_Name>
+        <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="08cf4b5c-131f-4873-86fe-3fde919cc501"/>
+      </propertySet>
+      <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="e65e01f7-46a0-49cc-9c29-c7ba161e438b"/>
+    </prototypes>
+    <prototypes type="systemcomposer.profile.Prototype" uuid="c289c307-bded-4ecb-8cf8-e8bc1d7102ea">
+      <componentHeaderColor type="systemcomposer.profile.RGBValueStruct">
+        <BLUE>67</BLUE>
+        <GREEN>67</GREEN>
+        <RED>115</RED>
+      </componentHeaderColor>
+      <p_Name>TAEC_Torque_Achieved_Estimation</p_Name>
+      <defaultStereotypeMap type="systemcomposer.profile.DefaultStereotypeMap" uuid="06d388a9-686c-4de2-9b96-0f957cbb10ed"/>
+      <parentProxy type="systemcomposer.services.proxy.ProxySource" uuid="66576232-89a2-4052-a2ee-72179337c2d3">
+        <Proxy type="systemcomposer.services.proxy.BidirectionalProxy" uuid="367eeabd-e5e0-41ae-918e-0617396fd2cd"/>
+        <realElement type="systemcomposer.profile.Prototype" uuid="c289c307-bded-4ecb-8cf8-e8bc1d7102ea"/>
+      </parentProxy>
+      <propertySet type="systemcomposer.property.PropertySet" uuid="13954a30-a79a-4924-9364-a43103383569">
+        <p_Name>Stereotype</p_Name>
+        <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="c5e8b320-2ce4-4f93-b8f0-25db24dbfdd3"/>
+      </propertySet>
+      <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="f0ae6209-1e30-4ce0-beb9-2917c84c9cad"/>
+    </prototypes>
+    <prototypes type="systemcomposer.profile.Prototype" uuid="dc2e11f7-e7e0-4eaa-b268-9c54e108ae24">
+      <appliesTo>Port</appliesTo>
+      <connectorLineColor type="systemcomposer.profile.RGBValueStruct">
+        <BLUE>41</BLUE>
+        <GREEN>105</GREEN>
+        <RED>233</RED>
+      </connectorLineColor>
+      <p_Name>TDLC_DataBus</p_Name>
+      <defaultStereotypeMap type="systemcomposer.profile.DefaultStereotypeMap" uuid="e549195c-463e-43b5-984a-810c8a8feabd"/>
+      <parentProxy type="systemcomposer.services.proxy.ProxySource" uuid="ea6ce777-cda7-46b9-8e46-bfb2bdc2d41d">
+        <Proxy type="systemcomposer.services.proxy.BidirectionalProxy" uuid="8a2df0a7-de30-48cd-a088-1c86aa10055c"/>
+        <realElement type="systemcomposer.profile.Prototype" uuid="dc2e11f7-e7e0-4eaa-b268-9c54e108ae24"/>
+      </parentProxy>
+      <propertySet type="systemcomposer.property.PropertySet" uuid="c96d8f8c-6de5-4f8a-b08a-1d9db6650603">
+        <p_Name>Stereotype</p_Name>
+        <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="38dca5f7-502c-4ee8-96a3-d7c5b5b909db"/>
+      </propertySet>
+      <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="f34a0407-2a76-46ad-9a35-ccc2c93a03b9"/>
+    </prototypes>
+    <prototypes type="systemcomposer.profile.Prototype" uuid="a759fd94-a94d-46c9-ac77-41d1e6ba22de">
+      <componentHeaderColor type="systemcomposer.profile.RGBValueStruct">
+        <BLUE>41</BLUE>
+        <GREEN>105</GREEN>
+        <RED>233</RED>
+      </componentHeaderColor>
+      <p_Name>TDLC_Torque_Derating_and_Limiting</p_Name>
+      <defaultStereotypeMap type="systemcomposer.profile.DefaultStereotypeMap" uuid="818819db-ae34-4c8f-86db-5b74d6940662"/>
+      <parentProxy type="systemcomposer.services.proxy.ProxySource" uuid="166127f6-1152-40e0-9d78-52ca4c2d3954">
+        <Proxy type="systemcomposer.services.proxy.BidirectionalProxy" uuid="367eeabd-e5e0-41ae-918e-0617396fd2cd"/>
+        <realElement type="systemcomposer.profile.Prototype" uuid="a759fd94-a94d-46c9-ac77-41d1e6ba22de"/>
+      </parentProxy>
+      <propertySet type="systemcomposer.property.PropertySet" uuid="ff023b30-d0b3-4d14-9163-abc3160bfbf4">
+        <p_Name>Stereotype</p_Name>
+        <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="84b8205a-dfa7-4260-ac73-9269bfd5e705"/>
+      </propertySet>
+      <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="2c5c9e01-a918-4c5b-9f40-5cc3e60a9c05"/>
+    </prototypes>
+    <prototypes type="systemcomposer.profile.Prototype" uuid="7f3d234a-ef9f-407d-a852-f65b769fbd0d">
+      <componentHeaderColor type="systemcomposer.profile.RGBValueStruct">
+        <GREEN>153</GREEN>
+        <RED>255</RED>
+      </componentHeaderColor>
+      <p_Name>VSDC</p_Name>
+      <defaultStereotypeMap type="systemcomposer.profile.DefaultStereotypeMap" uuid="3ce759d8-d995-4a1a-8357-3ed9070718fb"/>
+      <parentProxy type="systemcomposer.services.proxy.ProxySource" uuid="6a34b85a-7574-4f4b-bc5b-8c3304067d73">
+        <Proxy type="systemcomposer.services.proxy.BidirectionalProxy" uuid="4a119dd7-8f91-46f3-b08c-a19f439b86d8"/>
+        <realElement type="systemcomposer.profile.Prototype" uuid="7f3d234a-ef9f-407d-a852-f65b769fbd0d"/>
+      </parentProxy>
+      <propertySet type="systemcomposer.property.PropertySet" uuid="88203599-79b6-41ee-b100-c9cc780eb887">
+        <p_Name>Stereotype</p_Name>
+        <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="9f889610-b54e-4af4-95db-d74357f6e286"/>
+      </propertySet>
+      <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="407572ec-43e7-4623-865b-91bc7f1e326a"/>
+    </prototypes>
+    <prototypes type="systemcomposer.profile.Prototype" uuid="29999556-7611-4999-a0aa-b371c61f0f92">
+      <appliesTo>Port</appliesTo>
+      <connectorLineColor type="systemcomposer.profile.RGBValueStruct">
+        <GREEN>153</GREEN>
+        <RED>255</RED>
+      </connectorLineColor>
+      <connectorLineStyle>DASH_DOT</connectorLineStyle>
+      <p_Name>VSDC_DataBus</p_Name>
+      <defaultStereotypeMap type="systemcomposer.profile.DefaultStereotypeMap" uuid="fb85ed2c-26d8-4f41-ad95-20586da5436d"/>
+      <parentProxy type="systemcomposer.services.proxy.ProxySource" uuid="cc04d719-a647-469f-86bf-2172538c7a39">
+        <Proxy type="systemcomposer.services.proxy.BidirectionalProxy" uuid="8a2df0a7-de30-48cd-a088-1c86aa10055c"/>
+        <realElement type="systemcomposer.profile.Prototype" uuid="29999556-7611-4999-a0aa-b371c61f0f92"/>
+      </parentProxy>
+      <propertySet type="systemcomposer.property.PropertySet" uuid="c797a051-2776-48fe-a538-6f057acf97cb">
+        <p_Name>Stereotype</p_Name>
+        <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="25435219-ecfb-4eb9-ba6c-3065e34f6ee2"/>
+      </propertySet>
+      <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="fb963dba-a8a7-488d-a79c-c64a642cfafb"/>
+    </prototypes>
+    <prototypes type="systemcomposer.profile.Prototype" uuid="c8ab4e63-ab02-4164-b295-3d87159a8f9c">
+      <appliesTo>Port</appliesTo>
+      <connectorLineColor type="systemcomposer.profile.RGBValueStruct">
+        <BLUE>249</BLUE>
+        <GREEN>239</GREEN>
+        <RED>207</RED>
+      </connectorLineColor>
+      <p_Name>VSOC_DataBus</p_Name>
+      <defaultStereotypeMap type="systemcomposer.profile.DefaultStereotypeMap" uuid="e789d364-7a65-4132-b494-be478883694d"/>
+      <parentProxy type="systemcomposer.services.proxy.ProxySource" uuid="5545623f-271a-4083-8eaa-2b2805bc728e">
+        <Proxy type="systemcomposer.services.proxy.BidirectionalProxy" uuid="8a2df0a7-de30-48cd-a088-1c86aa10055c"/>
+        <realElement type="systemcomposer.profile.Prototype" uuid="c8ab4e63-ab02-4164-b295-3d87159a8f9c"/>
+      </parentProxy>
+      <propertySet type="systemcomposer.property.PropertySet" uuid="a368b767-db11-4561-a9d6-e8e8da479fb5">
+        <p_Name>Stereotype</p_Name>
+        <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="7671e7f1-5c47-44ac-accd-91af533d3b24"/>
+      </propertySet>
+      <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="8cff2fd1-8cb3-44c5-a985-95ca5942aba1"/>
+    </prototypes>
+    <prototypes type="systemcomposer.profile.Prototype" uuid="c470cf5c-7073-4fad-88cb-7fa2d2b27ea4">
+      <componentHeaderColor type="systemcomposer.profile.RGBValueStruct">
+        <BLUE>252</BLUE>
+        <GREEN>241</GREEN>
+        <RED>208</RED>
+      </componentHeaderColor>
+      <p_Name>VSOC_Voltage_Sensor_Offset_Calibration</p_Name>
+      <defaultStereotypeMap type="systemcomposer.profile.DefaultStereotypeMap" uuid="4e61d1ad-3c71-41d9-acac-c0fee4bab766"/>
+      <parentProxy type="systemcomposer.services.proxy.ProxySource" uuid="d606e367-8f57-4949-9e8c-e57f4858d248">
+        <Proxy type="systemcomposer.services.proxy.BidirectionalProxy" uuid="367eeabd-e5e0-41ae-918e-0617396fd2cd"/>
+        <realElement type="systemcomposer.profile.Prototype" uuid="c470cf5c-7073-4fad-88cb-7fa2d2b27ea4"/>
+      </parentProxy>
+      <propertySet type="systemcomposer.property.PropertySet" uuid="5161eea0-94f6-4ead-a8b1-458032849180">
+        <p_Name>Stereotype</p_Name>
+        <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="c8173661-72e6-46a8-9ff4-2e267c0758cd"/>
+      </propertySet>
+      <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="0bde9276-4e2b-475d-aca4-bb3d1509bf74"/>
+    </prototypes>
+    <valueTypes type="systemcomposer.property.BooleanType" uuid="2fa8ee79-9766-4549-8bb2-c43bc4533584">
+      <p_Name>boolean</p_Name>
+    </valueTypes>
+    <valueTypes type="systemcomposer.property.FloatType" uuid="4b7f8e41-5d75-4e93-8a5e-c61dd91a0c18">
+      <max>1.7976931348623157e+308</max>
+      <min>-1.7976931348623157e+308</min>
+      <p_Name>double</p_Name>
+    </valueTypes>
+    <valueTypes type="systemcomposer.property.IntegerType" uuid="98235a85-ac61-4379-b2f9-efff2b2d69f7">
+      <max>32767</max>
+      <min>-32768</min>
+      <p_Name>int16</p_Name>
+    </valueTypes>
+    <valueTypes type="systemcomposer.property.IntegerType" uuid="8e186294-d005-43c5-b0e2-02e22b6bb79c">
+      <max>2147483647</max>
+      <min>-2147483648</min>
+      <p_Name>int32</p_Name>
+    </valueTypes>
+    <valueTypes type="systemcomposer.property.IntegerType" uuid="cd808b4f-6f29-44f3-be61-67025aaa59c7">
+      <max>9223372036854775807</max>
+      <min>-9223372036854775808</min>
+      <p_Name>int64</p_Name>
+    </valueTypes>
+    <valueTypes type="systemcomposer.property.IntegerType" uuid="c53c09d5-c6c2-4070-9378-8ddc2e51a73e">
+      <max>127</max>
+      <min>-128</min>
+      <p_Name>int8</p_Name>
+    </valueTypes>
+    <valueTypes type="systemcomposer.property.FloatType" uuid="1bd7c144-34ec-4bb2-8802-e343d19d5a3c">
+      <max>3.4028234663852886e+38</max>
+      <min>-3.4028234663852886e+38</min>
+      <p_Name>single</p_Name>
+    </valueTypes>
+    <valueTypes type="systemcomposer.property.StringType" uuid="2b5cc299-0d37-41d2-99f2-e9c64e6b19f9">
+      <p_Name>string</p_Name>
+    </valueTypes>
+    <valueTypes type="systemcomposer.property.StringArrayType" uuid="394eb8af-0d6c-487f-9b53-93fafd592df5">
+      <p_Name>stringArray</p_Name>
+    </valueTypes>
+    <valueTypes type="systemcomposer.property.IntegerType" uuid="7e39ae2f-ac45-45d4-ab86-5a092ee94764">
+      <max>65535</max>
+      <min>0</min>
+      <p_Name>uint16</p_Name>
+    </valueTypes>
+    <valueTypes type="systemcomposer.property.IntegerType" uuid="16960e5d-2feb-45d7-a655-8ba1d5eec099">
+      <max>4294967295</max>
+      <min>0</min>
+      <p_Name>uint32</p_Name>
+    </valueTypes>
+    <valueTypes type="systemcomposer.property.IntegerType" uuid="72aa342d-8d79-47d0-a6b7-ffe7a27a42da">
+      <max>9223372036854775807</max>
+      <min>0</min>
+      <p_Name>uint64</p_Name>
+    </valueTypes>
+    <valueTypes type="systemcomposer.property.IntegerType" uuid="73a1a2c1-38e3-41c7-a26d-a619a58d34c9">
+      <max>255</max>
+      <min>0</min>
+      <p_Name>uint8</p_Name>
+    </valueTypes>
+    <p_Name>TractionEmotorSoftwareArch_profiles</p_Name>
+    <elemProxy type="systemcomposer.services.proxy.ProxyTarget" uuid="19249318-206a-4336-96fc-2f07ab19a464"/>
+  </systemcomposer.profile.Profile>
+  <systemcomposer.services.proxy.ModelIdentifier type="systemcomposer.services.proxy.ModelIdentifier" uuid="8bf417ba-4a4e-4e47-9c8b-d3a4159d371a">
+    <URI>TractionEmotorSoftwareArch_profiles</URI>
+    <modelType>PROFILE_MODEL</modelType>
+  </systemcomposer.services.proxy.ModelIdentifier>
+  <systemcomposer.property.UnitQueryClientWrapper type="systemcomposer.property.UnitQueryClientWrapper" uuid="73024de5-152b-4cf6-b353-0e6553f826f5"/>
+  <systemcomposer.services.proxy.ModelResolver type="systemcomposer.services.proxy.ModelResolver" uuid="e3bda778-8235-4a88-9808-27d5a262cf90">
+    <Proxies type="systemcomposer.services.proxy.BidirectionalProxy" uuid="4a119dd7-8f91-46f3-b08c-a19f439b86d8">
+      <Source type="systemcomposer.services.proxy.ProxySource" uuid="90434e30-5107-4779-86db-813e26879764"/>
+      <Source type="systemcomposer.services.proxy.ProxySource" uuid="55c4b6de-13cc-42b4-b8b0-b3b06ed0a450"/>
+      <Source type="systemcomposer.services.proxy.ProxySource" uuid="149baa6b-cb6d-42e5-9b6e-767654c1ccee"/>
+      <Source type="systemcomposer.services.proxy.ProxySource" uuid="2678bf24-f9fb-4a86-a11d-2fdcd151810d"/>
+      <Source type="systemcomposer.services.proxy.ProxySource" uuid="b3a3830c-76c9-403e-9ef0-eea0753ffad7"/>
+      <Source type="systemcomposer.services.proxy.ProxySource" uuid="6a34b85a-7574-4f4b-bc5b-8c3304067d73"/>
+      <TargetId>10d77e61-fe6d-48c0-8b17-ed11a1363085</TargetId>
+    </Proxies>
+    <Proxies type="systemcomposer.services.proxy.BidirectionalProxy" uuid="367eeabd-e5e0-41ae-918e-0617396fd2cd">
+      <Source type="systemcomposer.services.proxy.ProxySource" uuid="08b506a7-b619-4925-80fa-654b4eb05460"/>
+      <Source type="systemcomposer.services.proxy.ProxySource" uuid="166127f6-1152-40e0-9d78-52ca4c2d3954"/>
+      <Source type="systemcomposer.services.proxy.ProxySource" uuid="5d9c9d3e-209a-457d-8a20-6bc7338fe43c"/>
+      <Source type="systemcomposer.services.proxy.ProxySource" uuid="ef2578d8-938e-4e8e-a08e-64c6e1732f50"/>
+      <Source type="systemcomposer.services.proxy.ProxySource" uuid="91d68ddd-1ec4-4540-abe5-817e6b75453a"/>
+      <Source type="systemcomposer.services.proxy.ProxySource" uuid="66576232-89a2-4052-a2ee-72179337c2d3"/>
+      <Source type="systemcomposer.services.proxy.ProxySource" uuid="38ca4230-7ba0-4db9-97f9-bba563738d29"/>
+      <Source type="systemcomposer.services.proxy.ProxySource" uuid="a9855942-8143-4e94-aa80-b0a5c9b2fefb"/>
+      <Source type="systemcomposer.services.proxy.ProxySource" uuid="d0fe8c58-6394-46cf-a6b2-150b5ff48bb8"/>
+      <Source type="systemcomposer.services.proxy.ProxySource" uuid="83f62c6b-648f-4c60-a681-d95407770b48"/>
+      <Source type="systemcomposer.services.proxy.ProxySource" uuid="2342af6e-e681-4995-8663-487a0316a494"/>
+      <Source type="systemcomposer.services.proxy.ProxySource" uuid="d606e367-8f57-4949-9e8c-e57f4858d248"/>
+      <TargetId>36fa9d1b-3464-4aab-8959-103af23c261d</TargetId>
+    </Proxies>
+    <Proxies type="systemcomposer.services.proxy.BidirectionalProxy" uuid="6002fd57-685a-4c4a-8891-18b4b471e1be">
+      <Source type="systemcomposer.services.proxy.ProxySource" uuid="4d1155b3-6054-4d62-80cd-b15d6ca62e02"/>
+      <TargetId>56ef1d87-bde9-4a92-b593-029898ecbe6f</TargetId>
+    </Proxies>
+    <Proxies type="systemcomposer.services.proxy.BidirectionalProxy" uuid="8a2df0a7-de30-48cd-a088-1c86aa10055c">
+      <Source type="systemcomposer.services.proxy.ProxySource" uuid="827dce88-3272-44fd-90bf-4fdb1566fe2e"/>
+      <Source type="systemcomposer.services.proxy.ProxySource" uuid="ea6ce777-cda7-46b9-8e46-bfb2bdc2d41d"/>
+      <Source type="systemcomposer.services.proxy.ProxySource" uuid="793369bf-3845-4d4e-a2ee-0b2e21802942"/>
+      <Source type="systemcomposer.services.proxy.ProxySource" uuid="5257290e-a3b6-419d-b2d1-1c9613c43a08"/>
+      <Source type="systemcomposer.services.proxy.ProxySource" uuid="cbfbcb8c-d1d4-4f39-a249-1c62b87a5d7f"/>
+      <Source type="systemcomposer.services.proxy.ProxySource" uuid="2435510c-bd9a-40c3-90ad-5aff4f5d657e"/>
+      <Source type="systemcomposer.services.proxy.ProxySource" uuid="0e491bb3-35fb-41a1-8c70-37290f041aaa"/>
+      <Source type="systemcomposer.services.proxy.ProxySource" uuid="3c7cd0f8-1f3d-45b3-a778-bf9455540c19"/>
+      <Source type="systemcomposer.services.proxy.ProxySource" uuid="532f6f5d-fb4f-4864-8865-f90d3e848b67"/>
+      <Source type="systemcomposer.services.proxy.ProxySource" uuid="5545623f-271a-4083-8eaa-2b2805bc728e"/>
+      <Source type="systemcomposer.services.proxy.ProxySource" uuid="cb83f6d6-bcbd-44a2-b445-0bf541573faf"/>
+      <Source type="systemcomposer.services.proxy.ProxySource" uuid="39d44b28-c8b4-4d05-8502-9169e6cbe862"/>
+      <Source type="systemcomposer.services.proxy.ProxySource" uuid="4f9c74b9-ecad-4267-abe4-bc2b55047553"/>
+      <Source type="systemcomposer.services.proxy.ProxySource" uuid="e6151e6b-7b84-41b6-b219-54074c74c33d"/>
+      <Source type="systemcomposer.services.proxy.ProxySource" uuid="cc04d719-a647-469f-86bf-2172538c7a39"/>
+      <Source type="systemcomposer.services.proxy.ProxySource" uuid="e3e14c23-3066-416d-97ad-a0375b71e50a"/>
+      <TargetId>86e4cd86-c52e-430a-8945-d0ae66c65e32</TargetId>
+    </Proxies>
+    <modelType>PROFILE_MODEL</modelType>
+    <URI>TractionEmotorSoftwareArch_profiles</URI>
+  </systemcomposer.services.proxy.ModelResolver>
+  <systemcomposer.profile.DefaultStereotypePair type="systemcomposer.profile.DefaultStereotypePair" uuid="76a9b61c-32e6-4258-8add-e65a15856de7">
+    <defaultStereotype type="systemcomposer.profile.Prototype" uuid="918bf319-f6ab-47f8-a5bb-b1c7464b312c"/>
+    <key>component</key>
+  </systemcomposer.profile.DefaultStereotypePair>
+  <systemcomposer.profile.DefaultStereotypePair type="systemcomposer.profile.DefaultStereotypePair" uuid="f28fc641-a9b8-46fc-bdd6-1eb944493d38">
+    <defaultStereotype type="systemcomposer.profile.Prototype" uuid="918bf319-f6ab-47f8-a5bb-b1c7464b312c"/>
+    <key>component</key>
+  </systemcomposer.profile.DefaultStereotypePair>
+</MF0>
