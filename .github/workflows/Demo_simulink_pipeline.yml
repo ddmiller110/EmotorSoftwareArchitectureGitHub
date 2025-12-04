@@ -4,8 +4,7 @@ name: Demo_simulink_pipeline
 on:
   push:
     branches:
-      - main
-
+      - master
 
 permissions:
   checks: write
