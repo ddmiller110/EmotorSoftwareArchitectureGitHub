@@ -1,45 +1,29 @@
+
 name: Demo_simulink_pipeline
 
 on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 permissions:
-  checks:
-    write
-
-  contents:
-    read
-
+  checks: write
+  contents: read
 
 jobs:
   Restore_Cache:
-    runs-on:
-      self-hosted
-
+    runs-on: self-hosted
     steps:
-      - name:
-          Checkout Repository
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-        uses:
-          actions/checkout@v4
-
-      - name:
-          Restore Cache
-
-        uses:
-          actions/cache@v4
-
+      - name: Restore Cache
+        uses: actions/cache@v4
         with:
-          key:
-            padv_artifacts-${{ github.run_id }}-${{ github.run_attempt }}
-
-          restore-keys:
-            padv_artifacts-cache
-
-          path:
-            |
+          key: padv_artifacts-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: padv_artifacts-cache
+          path: |
             AutoCodeGen
             PA_Results/CalculateFeedforwardVoltages/model_standards_results
             PA_Results/CalculateMaximumFluxLimit/model_standards_results
@@ -51,22 +35,12 @@ jobs:
             PA_Results/test_results
             derived/artifacts.dmr
 
-
-      - name:
-          Upload Artifacts
-
-        if:
-          ${{ !cancelled() }}
-
-        uses:
-          actions/upload-artifact@v4
-
+      - name: Upload Artifacts
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
         with:
-          name:
-            Restore_Cache_padv_artifacts
-
-          path:
-            |
+          name: Restore_Cache_padv_artifacts
+          path: |
             derived/artifacts.dmr
             AutoCodeGen
             PA_Results/CalculateFeedforwardVoltages/model_standards_results
@@ -77,217 +51,58 @@ jobs:
             PA_Results/RsCalculation/model_standards_results
             PA_Results/TractionEmotorRequirements/report
             PA_Results/test_results
-
-          retention-days:
-            30
+          retention-days: 30
 
   Runprocess:
-      if: ${{ !cancelled() }}
-      needs: Restore_Cache
-      runs-on: ubuntu-latest
-
-  # License token if needed (private repo / coder products)
-  
-  env:
-    MLM_LICENSE_TOKEN: ${{ secrets.MATLAB_BATCH_TOKEN }}
-
-  steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v4
-
-    - name: Download Artifacts
-      uses: actions/download-artifact@v4
-      with:
-        name: Restore_Cache_padv_artifacts
-
-    - name: Set up MATLAB R2025b with required toolboxes
-      uses: matlab-actions/setup-matlab@v2
-      with:
-        release: R2025b
-        products: >
-          Simulink
-          Stateflow
-          Simulink_Test
-          Simulink_Coverage
-          Simulink_Check
-          Requirements_Toolbox
-          MATLAB_Coder
-          Simulink_Coder
-          Embedded_Coder
-          System_Composer
-          Simulink_Design_Verifier
-          Powertrain_Blockset
-          Simulink_Report_Generator
-          Simulink_Control_Design
-          CI/CD_Automation_for_Simulink_Check
-
-    - name: Launch MATLAB
-      run: >
-        matlab 
-        -nodesktop 
-        -logfile output.log 
-        -batch "openProject(pwd);runprocess(Process = 'CIPipeline', Force = false, ExitInBatchMode = true, RerunFailedTasks = false, RerunErroredTasks = false, GenerateJUnitForProcess = false);"
-
-    - name: Upload Artifacts
-      if: ${{ !cancelled() }}
-      uses: actions/upload-artifact@v4
-      with:
-        name: Runprocess_padv_artifacts
-        path: |
-          derived/artifacts.dmr
-          AutoCodeGen
-          PA_Results/CalculateFeedforwardVoltages/model_standards_results
-          PA_Results/CalculateMaximumFluxLimit/model_standards_results
-          PA_Results/CalculateOptimalFlux/model_standards_results
-          PA_Results/CalculateTorqueLimits/model_standards_results
-          PA_Results/FluxWeakeningControl/model_standards_results
-          PA_Results/RsCalculation/model_standards_results
-          PA_Results/TractionEmotorRequirements/report
-          PA_Results/test_results
-        retention-days: 30
-
-
-
-  Generate_PADV_Report:
-    if:
-      ${{ !cancelled() }}
-
-    needs:
-      Runprocess
-
-    runs-on:
-      self-hosted
+    if: ${{ !cancelled() }}
+    needs: Restore_Cache
+    runs-on: ubuntu-latest
+    env:
+      MLM_LICENSE_TOKEN: ${{ secrets.MATLAB_BATCH_TOKEN }}
 
     steps:
-      - name:
-          Checkout Repository
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-        uses:
-          actions/checkout@v4
-
-      - name:
-          Download Artifacts
-
-        uses:
-          actions/download-artifact@v4
-
+      - name: Download Artifacts
+        uses: actions/download-artifact@v4
         with:
-          name:
-            Restore_Cache_padv_artifacts
+          name: Restore_Cache_padv_artifacts
 
-
-      - name:
-          Download Artifacts
-
-        uses:
-          actions/download-artifact@v4
-
+      - name: Set up MATLAB R2025b with required toolboxes
+        uses: matlab-actions/setup-matlab@v2
         with:
-          name:
-            Runprocess_padv_artifacts
+          release: R2025b
+          products: >
+            Simulink
+            Stateflow
+            Simulink_Test
+            Simulink_Coverage
+            Simulink_Check
+            Requirements_Toolbox
+            MATLAB_Coder
+            Simulink_Coder
+            Embedded_Coder
+            System_Composer
+            Simulink_Design_Verifier
+            Powertrain_Blockset
+            Simulink_Report_Generator
+            Simulink_Control_Design
+            CI/CD_Automation_for_Simulink_Check
 
+      - name: Launch MATLAB
+        run: >
+          matlab -nodesktop -logfile output.log -batch
+          "openProject(pwd);
+          runprocess(Process = 'CIPipeline', Force = false, ExitInBatchMode = true,
+          RerunFailedTasks = false, RerunErroredTasks = false, GenerateJUnitForProcess = false);"
 
-      - name:
-          Setup MATLAB
-
-        run:
-          echo "$PATH_TO_MATLAB" >> $GITHUB_PATH
-
-      - name:
-          Generate PADV Report
-
-        run:
-          >
-          matlab 
-          -nodesktop 
-          -logfile output.log 
-          -batch "openProject(pwd);
-          rptObj=padv.ProcessAdvisorReportGenerator(Process = 'CIPipeline', Format='pdf', OutputPath=fullfile(currentProject().RootFolder,'ProcessAdvisorReport'));
-          rptObj.generateReport();" 
-
-      - name:
-          Upload Artifacts
-
-        if:
-          ${{ !cancelled() }}
-
-        uses:
-          actions/upload-artifact@v4
-
+      - name: Upload Artifacts
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
         with:
-          name:
-            Generate_PADV_Report_padv_artifacts
-
-          path:
-            |
-            derived/artifacts.dmr
-            ProcessAdvisorReport.pdf
-
-          retention-days:
-            30
-
-
-
-
-  Collect_Artifacts:
-    if:
-      ${{ !cancelled() }}
-
-    needs:
-      Generate_PADV_Report
-
-    runs-on:
-      self-hosted
-
-    steps:
-      - name:
-          Download Artifacts
-
-        uses:
-          actions/download-artifact@v4
-
-        with:
-          name:
-            Restore_Cache_padv_artifacts
-
-
-      - name:
-          Download Artifacts
-
-        uses:
-          actions/download-artifact@v4
-
-        with:
-          name:
-            Runprocess_padv_artifacts
-
-
-      - name:
-          Download Artifacts
-
-        uses:
-          actions/download-artifact@v4
-
-        with:
-          name:
-            Generate_PADV_Report_padv_artifacts
-
-
-      - name:
-          Upload Artifacts
-
-        if:
-          ${{ !cancelled() }}
-
-        uses:
-          actions/upload-artifact@v4
-
-        with:
-          name:
-            Collect_Artifacts_padv_artifacts
-
-          path:
-            |
+          name: Runprocess_padv_artifacts
+          path: |
             derived/artifacts.dmr
             AutoCodeGen
             PA_Results/CalculateFeedforwardVoltages/model_standards_results
@@ -298,23 +113,96 @@ jobs:
             PA_Results/RsCalculation/model_standards_results
             PA_Results/TractionEmotorRequirements/report
             PA_Results/test_results
+          retention-days: 30
 
-          retention-days:
-            30
+  Generate_PADV_Report:
+    if: ${{ !cancelled() }}
+    needs: Runprocess
+    runs-on: self-hosted
+    env:
+      MLM_LICENSE_TOKEN: ${{ secrets.MATLAB_BATCH_TOKEN }}
 
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-      - name:
-          Save Cache
-
-        uses:
-          actions/cache@v4
-
+      - name: Download Artifacts
+        uses: actions/download-artifact@v4
         with:
-          key:
-            padv_artifacts-cache-${{ github.sha }}
+          name: Restore_Cache_padv_artifacts
 
-          path:
-            |
+      - name: Download Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: Runprocess_padv_artifacts
+
+      # If you use self-hosted runner here, ensure MATLAB is available on PATH.
+      # If you prefer GitHub VM, switch runs-on to ubuntu-latest and use setup-matlab.
+      - name: Setup MATLAB (self-hosted only)
+        run: echo "$PATH_TO_MATLAB" >> $GITHUB_PATH
+
+      - name: Generate PADV Report
+        run: >
+          matlab -nodesktop -logfile output.log -batch
+          "openProject(pwd);
+          rptObj=padv.ProcessAdvisorReportGenerator(Process = 'CIPipeline', Format='pdf',
+          OutputPath=fullfile(currentProject().RootFolder,'ProcessAdvisorReport'));
+          rptObj.generateReport();"
+
+      - name: Upload Artifacts
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: Generate_PADV_Report_padv_artifacts
+          path: |
+            derived/artifacts.dmr
+            ProcessAdvisorReport.pdf
+          retention-days: 30
+
+  Collect_Artifacts:
+    if: ${{ !cancelled() }}
+    needs: Generate_PADV_Report
+    runs-on: self-hosted
+
+    steps:
+      - name: Download Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: Restore_Cache_padv_artifacts
+
+      - name: Download Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: Runprocess_padv_artifacts
+
+      - name: Download Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: Generate_PADV_Report_padv_artifacts
+
+      - name: Upload Artifacts
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: Collect_Artifacts_padv_artifacts
+          path: |
+            derived/artifacts.dmr
+            AutoCodeGen
+            PA_Results/CalculateFeedforwardVoltages/model_standards_results
+            PA_Results/CalculateMaximumFluxLimit/model_standards_results
+            PA_Results/CalculateOptimalFlux/model_standards_results
+            PA_Results/CalculateTorqueLimits/model_standards_results
+            PA_Results/FluxWeakeningControl/model_standards_results
+            PA_Results/RsCalculation/model_standards_results
+            PA_Results/TractionEmotorRequirements/report
+            PA_Results/test_results
+          retention-days: 30
+
+      - name: Save Cache
+        uses: actions/cache@v4
+        with:
+          key: padv_artifacts-cache-${{ github.sha }}
+          path: |
             AutoCodeGen
             PA_Results/CalculateFeedforwardVoltages/model_standards_results
             PA_Results/CalculateMaximumFluxLimit/model_standards_results
