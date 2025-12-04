@@ -13,11 +13,6 @@ permissions:
     read
 
 
-env:
-  PATH_TO_MATLAB:
-    PATH_TO_MATLAB
-
-
 jobs:
   Restore_Cache:
     runs-on:
@@ -86,15 +81,15 @@ jobs:
           retention-days:
             30
 
-Runprocess:
-  if: ${{ !cancelled() }}
-  needs: Restore_Cache
-  runs-on: ubuntu-latest
+  Runprocess:
+      if: ${{ !cancelled() }}
+      needs: Restore_Cache
+      runs-on: ubuntu-latest
 
   # License token if needed (private repo / coder products)
   
-env:
-  MLM_LICENSE_TOKEN: ${{ secrets.MATLAB_BATCH_TOKEN }}
+  env:
+    MLM_LICENSE_TOKEN: ${{ secrets.MATLAB_BATCH_TOKEN }}
 
   steps:
     - name: Checkout Repository
