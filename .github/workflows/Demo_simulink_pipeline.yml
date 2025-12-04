@@ -21,7 +21,8 @@ jobs:
         uses: actions/cache@v4
         with:
           key: padv_artifacts-${{ github.run_id }}-${{ github.run_attempt }}
-          restore-keys: padv_artifacts-cache
+          restore-keys: |
+            padv_artifacts-
           path: |
             AutoCodeGen
             PA_Results/CalculateFeedforwardVoltages/model_standards_results
@@ -65,6 +66,7 @@ jobs:
 
       - name: Download Artifacts
         uses: actions/download-artifact@v4
+        continue-on-error: true  # It's OK if no artifacts exist
         with:
           name: Restore_Cache_padv_artifacts
 
