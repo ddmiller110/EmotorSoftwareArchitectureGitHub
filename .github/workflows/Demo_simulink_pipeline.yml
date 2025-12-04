@@ -1,43 +1,45 @@
-name: EMotorSoftwareMBD Pipeline
+name:
+  simulink_pipeline
 
 on:
   push:
     branches: [ master ]
-  # Uncomment to allow manual triggers:
-  # workflow_dispatch:
 
 permissions:
-  contents: read
-  checks: write
+  checks:
+    write
 
-# Global env vars available to all jobs
+  contents:
+    read
+
+
 # env:
-#   PATH_TO_MATLAB: /opt/matlab/R2025b
+#   PATH_TO_MATLAB:
+#     PATH_TO_MATLAB
+
 
 jobs:
-
-  # ---------------------------------------------------------
-  # 1) RESTORE CACHE JOB
-  # ---------------------------------------------------------
-  restore_cache:
-    name: Restore Cached Artifacts
-    runs-on: ubuntu-latest
+  Restore_Cache:
+    runs-on:
+      ubuntu-latest
 
     steps:
+      - name:
+          Checkout Repository
 
-      # Always checkout at start of job
-      - name: Checkout repository
-        uses: actions/checkout@v4
+        uses:
+          actions/checkout@v4
 
-      # Restore cache with stable fallback key
-      # Best practice: key should be stable across "successful" builds
-      - name: Restore MATLAB build artifacts from cache
-        uses: actions/cache@v4
+      - name:
+          Restore Cache
+
+        uses:
+          actions/cache@v4
+
         with:
-          # primary key is tied to workflow run, ensuring uniqueness
-          key: padv_artifacts-${{ github.run_id }}-${{ github.run_attempt }}
-          
-          # fallback key for reuse of last successful build cache
+          key:
+            padv_artifacts-${{ github.run_id }}-${{ github.run_attempt }}
+
           restore-keys: |
             padv_artifacts-
           path: |
@@ -51,13 +53,20 @@ jobs:
             PA_Results/TractionEmotorRequirements/report
             PA_Results/test_results
             derived/artifacts.dmr
-      # Upload artifacts for downstream jobs
-      - name: Upload restored cache artifacts
-        if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v4
+
+
+      - name:
+          Upload Artifacts
+
+        if:
+          ${{ !cancelled() }}
+
+        uses:
+          actions/upload-artifact@v4
+
         with:
           name: restore_cache_artifacts
-          retention-days: 90
+
           path: |
             derived/artifacts.dmr
             AutoCodeGen
@@ -69,34 +78,47 @@ jobs:
             PA_Results/RsCalculation/model_standards_results
             PA_Results/TractionEmotorRequirements/report
             PA_Results/test_results
-  # ---------------------------------------------------------
-  # 2) MAIN PROCESS JOB — DEPENDS ON RESTORE CACHE
-  # ---------------------------------------------------------
-  run_process:
-    name: Run MATLAB CI Pipeline
-    needs: restore_cache
-    runs-on: ubuntu-latest
 
-    if: ${{ !cancelled() }}   # Skip if workflow was cancelled early
+          retention-days:
+            30
+
+
+
+  Runprocess:
+    if:
+      ${{ !cancelled() }}
+
+    needs:
+      Restore_Cache
+
+    runs-on:
+      ubuntu-latest
 
     env:
       # Secure secret injection (job-level)
       MLM_LICENSE_TOKEN: ${{ secrets.MATLAB_BATCH_TOKEN }}
 
     steps:
+      - name:
+          Checkout Repository
 
-      - name: Checkout repository
-        uses: actions/checkout@v4
+        uses:
+          actions/checkout@v4
 
-      # Bring in cached artifacts
-      - name: Download restored cache artifacts
-        uses: actions/download-artifact@v4
-        continue-on-error: true  # It's OK if no artifacts exist
+      - name:
+          Download Artifacts
+
+        uses:
+          actions/download-artifact@v4
+        continue-on-error: true
         with:
-          name: restore_cache_artifacts
+          name:
+            Restore_Cache_padv_artifacts
 
-      # Install MATLAB with selected products
-      - name: Setup MATLAB
+
+      - name:
+          Setup MATLAB
+
         uses: matlab-actions/setup-matlab@v2
         with:
           release: R2025b
@@ -117,15 +139,7 @@ jobs:
             Powertrain_Blockset
             Simulink_Report_Generator
             Simulink_Control_Design
-      # Start a display server (for models needing GUI APIs)
-      # - name: Start virtual display (Xvfb)
-      #   run: |
-      #     sudo apt-get update -y
-      #     sudo apt-get install -y xvfb
-      #     Xvfb :99 &
-      #     echo "DISPLAY=:99" >> $GITHUB_ENV
 
-      # Run MATLAB process script in batch mode
       - name: Run MATLAB CI process
         uses: matlab-actions/run-command@v2
         with:
@@ -139,14 +153,21 @@ jobs:
               RerunErroredTasks=false, ...
               GenerateJUnitForProcess=true);
               
-      # Upload CI output results
-      - name: Upload CI output artifacts
-        if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v4
+      - name:
+          Upload Artifacts
+
+        if:
+          ${{ !cancelled() }}
+
+        uses:
+          actions/upload-artifact@v4
+
         with:
-          name: runprocess_artifacts
-          retention-days: 90
-          path: |
+          name:
+            Runprocess_padv_artifacts
+
+          path:
+            |
             derived/artifacts.dmr
             AutoCodeGen
             PA_Results/CalculateFeedforwardVoltages/model_standards_results
@@ -157,3 +178,34 @@ jobs:
             PA_Results/RsCalculation/model_standards_results
             PA_Results/TractionEmotorRequirements/report
             PA_Results/test_results
+
+          retention-days:
+            30
+
+
+
+  Collect_Artifacts:
+    if:
+      ${{ !cancelled() }}
+
+    needs:
+      Runprocess
+
+    runs-on: ubuntu-latest
+      
+    steps:
+      - name:
+          Download Artifacts
+
+        uses:
+          actions/download-artifact@v4
+
+        with:
+          name:
+            Restore_Cache_padv_artifacts
+
+
+ 
+
+
+
