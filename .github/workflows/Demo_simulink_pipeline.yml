@@ -13,7 +13,7 @@ permissions:
 
 jobs:
   Restore_Cache:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -118,7 +118,7 @@ jobs:
   Generate_PADV_Report:
     if: ${{ !cancelled() }}
     needs: Runprocess
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     env:
       MLM_LICENSE_TOKEN: ${{ secrets.MATLAB_BATCH_TOKEN }}
 
@@ -162,7 +162,7 @@ jobs:
   Collect_Artifacts:
     if: ${{ !cancelled() }}
     needs: Generate_PADV_Report
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     steps:
       - name: Download Artifacts
