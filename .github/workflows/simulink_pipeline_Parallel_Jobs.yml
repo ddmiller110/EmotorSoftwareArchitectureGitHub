@@ -1,18 +1,14 @@
 name: Simulink Pipeline Parallel Jobs
-
 on:
   push:
     branches: [ master ]
   # workflow_dispatch:
-
 permissions:
   contents: read
   checks: write
-
 env:
   # Global License Token (available to all jobs)
   MLM_LICENSE_TOKEN: ${{ secrets.MATLAB_BATCH_TOKEN }}
-
 jobs:
   # =====================================================
   # 1. PREPARE BASE STATE (Restore Cache & Distribute)
@@ -22,23 +18,21 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-
       # Restore the cache (if it exists)
+      # 💡 SUGGESTION INCORPORATED: Using branch name for cache key allows restoration from previous runs.
       - name: Restore Cache
         uses: actions/cache@v4
         with:
-          key: padv_artifacts-${{ github.run_id }}-${{ github.run_attempt }}
-          restore-keys: padv_artifacts-
+          key: padv_artifacts-${{ github.ref_name }}
+          restore-keys: padv_artifacts-${{ github.ref_name }}-
           path: |
             PA_Results
             derived/artifacts.dmr
             AutoCodeGen
-
       # FIX: Ensure directories exist so artifact creation never fails
       # If cache restored them, this does nothing. If cache missed, this creates empty folders.
       - name: Ensure Artifact Directories Exist
         run: mkdir -p PA_Results derived AutoCodeGen
-
       # Upload this state so parallel jobs can download it
       - name: Upload Base State Artifact
         uses: actions/upload-artifact@v4
@@ -50,8 +44,6 @@ jobs:
             AutoCodeGen
           retention-days: 1
           if-no-files-found: warn
-
-
   # =====================================================
   # 2. PARALLEL TASKS (Must download Base State first)
   # =====================================================
@@ -67,7 +59,6 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: Base_State_Artifact
-
       - name: Setup MATLAB
         uses: matlab-actions/setup-matlab@v2
         with:
@@ -78,14 +69,12 @@ jobs:
             # (Add other necessary toolboxes for this specific task)
           release: R2025b
           cache: true
-
       - name: Run Task 1
         uses: matlab-actions/run-command@v2
         with:
           command: |
             openProject(pwd);
             runprocess(Process='CIPipeline', Tasks="padv.builtin.task.GenerateRequirementsReport", Force=false, ExitInBatchMode=true);
-
       # Upload ONLY the specific results from this task
       - name: Upload Task 1 Results
         if: ${{ !cancelled() }}
@@ -93,32 +82,27 @@ jobs:
         with:
           name: Result_Task1
           path: PA_Results/TractionEmotorRequirements
-
   Task2_CheckModelingStandards:
     runs-on: ubuntu-latest
     needs: Prepare_Base_State
     steps:
       - uses: actions/checkout@v4
-
       - name: Download Base State
         uses: actions/download-artifact@v4
         with:
           name: Base_State_Artifact
-
       - name: Setup MATLAB
         uses: matlab-actions/setup-matlab@v2
         with:
           products: Simulink Simulink_Check Stateflow
           release: R2025b
           cache: true
-
       - name: Run Task 2
         uses: matlab-actions/run-command@v2
         with:
           command: |
             openProject(pwd);
             runprocess(Process='CIPipeline', Tasks="padv.builtin.task.RunModelStandards", Force=false, ExitInBatchMode=true);
-
       - name: Upload Task 2 Results
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v4
@@ -131,71 +115,60 @@ jobs:
              PA_Results/CalculateTorqueLimits
              PA_Results/FluxWeakeningControl
              PA_Results/RsCalculation
-
   Task3_RunTests:
     runs-on: ubuntu-latest
     needs: Prepare_Base_State
     steps:
       - uses: actions/checkout@v4
-
       - name: Download Base State
         uses: actions/download-artifact@v4
         with:
           name: Base_State_Artifact
-
       - name: Setup MATLAB
         uses: matlab-actions/setup-matlab@v2
         with:
           products: Simulink Simulink_Test Simulink_Coverage
           release: R2025b
           cache: true
-
       - name: Run Task 3
         uses: matlab-actions/run-command@v2
         with:
           command: |
             openProject(pwd);
             runprocess(Process='CIPipeline', Tasks="padv.builtin.task.RunTestsPerTestCase", Force=false, ExitInBatchMode=true);
-
       - name: Upload Task 3 Results
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v4
         with:
           name: Result_Task3
           path: PA_Results/test_results
-
   Task4_GenerateCode:
     runs-on: ubuntu-latest
     needs: Prepare_Base_State
     steps:
       - uses: actions/checkout@v4
-
       - name: Download Base State
         uses: actions/download-artifact@v4
         with:
           name: Base_State_Artifact
-
       - name: Setup MATLAB
         uses: matlab-actions/setup-matlab@v2
         with:
           products: MATLAB_Coder Simulink_Coder Embedded_Coder
           release: R2025b
           cache: true
-
       - name: Run Task 4
         uses: matlab-actions/run-command@v2
         with:
           command: |
             openProject(pwd);
             runprocess(Process='CIPipeline', Tasks="padv.builtin.task.GenerateCode", Force=false, ExitInBatchMode=true);
-
       - name: Upload Task 4 Results
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v4
         with:
           name: Result_Task4
           path: AutoCodeGen
-
   # =====================================================
   # 3. MERGE & FINALIZE (Fan-In)
   # =====================================================
@@ -204,9 +177,7 @@ jobs:
     needs: [Task1_GenerateRequirementsReport, Task2_CheckModelingStandards, Task3_RunTests, Task4_GenerateCode]
     steps:
       - uses: actions/checkout@v4
-
       # 1. Download ALL artifacts from previous parallel jobs
-      # Using pattern matching isn't supported in v4 yet, so we verify download paths or download all
       - name: Download All Artifacts
         uses: actions/download-artifact@v4
         with:
@@ -214,32 +185,28 @@ jobs:
           merge-multiple: true 
           # "merge-multiple: true" extracts all downloaded artifacts into the root workspace
           # effectively combining the folders from Tasks 1, 2, 3, 4 back into one PA_Results structure.
-
       - name: Setup MATLAB
         uses: matlab-actions/setup-matlab@v2
         with:
           products: Simulink Simulink_Report_Generator Simulink_Test
           release: R2025b
           cache: true
-
       - name: Run Merge Task
         uses: matlab-actions/run-command@v2
         with:
           command: |
             openProject(pwd);
             runprocess(Process='CIPipeline', Tasks="padv.builtin.task.MergeTestResults", Force=false, ExitInBatchMode=true);
-
       # 2. Save the final state to the GitHub Cache for the NEXT run
-      # This effectively updates the cache with the work done in all parallel jobs
+      # 💡 SUGGESTION INCORPORATED: Using branch name for cache key ensures the next run can restore this state.
       - name: Save Final Build Cache
         uses: actions/cache/save@v4
         with:
-          key: padv_artifacts-${{ github.run_id }}-${{ github.run_attempt }}
+          key: padv_artifacts-${{ github.ref_name }}
           path: |
             PA_Results
             derived/artifacts.dmr
             AutoCodeGen
-
       - name: Upload Final Merge Report
         uses: actions/upload-artifact@v4
         with:
