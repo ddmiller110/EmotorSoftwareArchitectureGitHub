@@ -1,51 +1,65 @@
-name:
-  simulink_pipeline
+
+name: simulink_pipeline
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master ]  # change to [ main ] if your repo's default branch is main
 
 permissions:
-  checks:
-    write
-
-  contents:
-    read
-
-
-# env:
-#   PATH_TO_MATLAB:
-#     PATH_TO_MATLAB
+  checks: write
+  contents: read
 
 
 jobs:
   Restore_Cache:
-    runs-on:
-      ubuntu-latest
-
+    runs-on: ubuntu-latest
     steps:
-      - name:
-          Checkout Repository
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-        uses:
-          actions/checkout@v4
+      # Add diagnostics here
+      - name: Ensure expected directories exist
+        run: |
+          mkdir -p AutoCodeGen
+          mkdir -p PA_Results/CalculateFeedforwardVoltages/model_standards_results
+          mkdir -p PA_Results/CalculateMaximumFluxLimit/model_standards_results
+          mkdir -p PA_Results/CalculateOptimalFlux/model_standards_results
+          mkdir -p PA_Results/CalculateTorqueLimits/model_standards_results
+          mkdir -p PA_Results/FluxWeakeningControl/model_standards_results
+          mkdir -p PA_Results/RsCalculation/model_standards_results
+          mkdir -p PA_Results/TractionEmotorRequirements/report
+          mkdir -p PA_Results/test_results
+          : > derived/artifacts.dmr
 
-      - name:
-          Restore Cache
+      - name: List files before uploading restore artifact
+        run: |
+          echo "Workspace: $GITHUB_WORKSPACE"
+          pwd
+          ls -la
+          echo "Listing candidate paths:"
+          for p in \
+            derived/artifacts.dmr \
+            AutoCodeGen \
+            PA_Results/CalculateFeedforwardVoltages/model_standards_results \
+            PA_Results/CalculateMaximumFluxLimit/model_standards_results \
+            PA_Results/CalculateOptimalFlux/model_standards_results \
+            PA_Results/CalculateTorqueLimits/model_standards_results \
+            PA_Results/FluxWeakeningControl/model_standards_results \
+            PA_Results/RsCalculation/model_standards_results \
+            PA_Results/TractionEmotorRequirements/report \
+            PA_Results/test_results; do
+            echo "==> $p"
+            [ -e "$p" ] && ls -la "$p" || echo "MISSING: $p"
+          done
 
-        uses:
-          actions/cache@v4
-
+      - name: Restore Cache
+        uses: actions/cache@v4
         with:
-          key:
-            padv_artifacts-${{ runner.os }}-${{ github.ref_name }}
-
+          key: padv_artifacts-${{ runner.os }}-${{ github.ref_name }}
           restore-keys: |
             padv_artifacts-${{ runner.os }}-
             padv_artifacts-
-
           path: |
-            derived/artifacts.dmr
             AutoCodeGen
             PA_Results/CalculateFeedforwardVoltages/model_standards_results
             PA_Results/CalculateMaximumFluxLimit/model_standards_results
@@ -55,93 +69,52 @@ jobs:
             PA_Results/RsCalculation/model_standards_results
             PA_Results/TractionEmotorRequirements/report
             PA_Results/test_results
+            derived/artifacts.dmr
 
+      - name: Upload artifacts from restore
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: restore_cache_artifacts
+          path: |
+            AutoCodeGen
+            PA_Results/CalculateFeedforwardVoltages/model_standards_results
+            PA_Results/CalculateMaximumFluxLimit/model_standards_results
+            PA_Results/CalculateOptimalFlux/model_standards_results
+            PA_Results/CalculateTorqueLimits/model_standards_results
+            PA_Results/FluxWeakeningControl/model_standards_results
+            PA_Results/RsCalculation/model_standards_results
+            PA_Results/TractionEmotorRequirements/report
+            PA_Results/test_results
+            derived/artifacts.dmr
+          retention-days: 30
 
+  Runprocess:
+    if: ${{ !cancelled() }}
+    needs: Restore_Cache
+    runs-on: ubuntu-latest
+    env:
+      MLM_LICENSE_TOKEN: ${{ secrets.MATLAB_BATCH_TOKEN }}
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-      - name:
-          Upload Artifacts
-
-        if:
-          ${{ !cancelled() }}
-
-        uses:
-          actions/upload-artifact@v4
-
+      - name: Download restore artifact
+        uses: actions/download-artifact@v4
+        continue-on-error: true
         with:
           name: restore_cache_artifacts
 
-          path: |
-            derived/artifacts.dmr
-            AutoCodeGen
-            PA_Results/CalculateFeedforwardVoltages/model_standards_results
-            PA_Results/CalculateMaximumFluxLimit/model_standards_results
-            PA_Results/CalculateOptimalFlux/model_standards_results
-            PA_Results/CalculateTorqueLimits/model_standards_results
-            PA_Results/FluxWeakeningControl/model_standards_results
-            PA_Results/RsCalculation/model_standards_results
-            PA_Results/TractionEmotorRequirements/report
-            PA_Results/test_results
-
-          retention-days:
-            30
-
-
-
-  Runprocess:
-    if:
-      ${{ !cancelled() }}
-
-    needs:
-      Restore_Cache
-
-    runs-on:
-      ubuntu-latest
-
-    env:
-      # Secure secret injection (job-level)
-      MLM_LICENSE_TOKEN: ${{ secrets.MATLAB_BATCH_TOKEN }}
-
-    steps:
-      - name:
-          Checkout Repository
-
-        uses:
-          actions/checkout@v4
-
-      - name:
-          Download Artifacts
-        continue-on-error: true
-        uses:
-          actions/download-artifact@v4
-        
-        with:
-          name:
-            restore_cache_artifacts
-
-
-      - name:
-          Setup MATLAB
-
+      - name: Setup MATLAB
         uses: matlab-actions/setup-matlab@v2
         with:
           release: R2025b
           cache: true
-          products: |
-            Simulink
-            Stateflow
-            Simulink_Test
-            Simulink_Coverage
-            Simulink_Check
-            Requirements_Toolbox
-            CI/CD_Automation_for_Simulink_Check
-            MATLAB_Coder
-            Simulink_Coder
-            Embedded_Coder
-            System_Composer
-            Simulink_Design_Verifier
-            Powertrain_Blockset
-            Simulink_Report_Generator
-            Simulink_Control_Design
+          products: >
+            Simulink Stateflow Simulink_Test Simulink_Coverage Simulink_Check
+            Requirements_Toolbox CI/CD_Automation_for_Simulink_Check MATLAB_Coder
+            Simulink_Coder Embedded_Coder System_Composer Simulink_Design_Verifier
+            Powertrain_Blockset Simulink_Report_Generator Simulink_Control_Design
 
       - name: Run MATLAB CI process
         uses: matlab-actions/run-command@v2
@@ -155,22 +128,21 @@ jobs:
               RerunFailedTasks=false, ...
               RerunErroredTasks=false, ...
               GenerateJUnitForProcess=true);
-              
-      - name:
-          Upload Artifacts
 
-        if:
-          ${{ !cancelled() }}
-
-        uses:
-          actions/upload-artifact@v4
-
+      - name: Upload MATLAB log
+        if: always()
+        uses: actions/upload-artifact@v4
         with:
-          name:
-            Runprocess_padv_artifacts
+          name: matlab-output-log
+          path: output.log
+          retention-days: 30
 
+      - name: Upload artifacts from runprocess
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: runprocess_artifacts
           path: |
-            derived/artifacts.dmr
             AutoCodeGen
             PA_Results/CalculateFeedforwardVoltages/model_standards_results
             PA_Results/CalculateMaximumFluxLimit/model_standards_results
@@ -180,37 +152,43 @@ jobs:
             PA_Results/RsCalculation/model_standards_results
             PA_Results/TractionEmotorRequirements/report
             PA_Results/test_results
-
-          retention-days:
-            30
-
-
+            derived/artifacts.dmr
+          retention-days: 30
 
   Collect_Artifacts:
-    if:
-      ${{ !cancelled() }}
-
-    needs:
-      Runprocess
-
+    if: ${{ !cancelled() }}
+    needs: Runprocess
     runs-on: ubuntu-latest
-      
     steps:
-      - name:
-          Download Artifacts
-      
-        uses:
-          actions/download-artifact@v4
+      - name: Download restore artifact
+        uses: actions/download-artifact@v4
         continue-on-error: true
         with:
-          name: restore_cache_artifacts 
- 
+          name: restore_cache_artifacts
+
       - name: Download runprocess artifact
         uses: actions/download-artifact@v4
         continue-on-error: true
         with:
           name: runprocess_artifacts
 
+      - name: Upload combined artifacts
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: combined_artifacts
+          path: |
+            AutoCodeGen
+            PA_Results/CalculateFeedforwardVoltages/model_standards_results
+            PA_Results/CalculateMaximumFluxLimit/model_standards_results
+            PA_Results/CalculateOptimalFlux/model_standards_results
+            PA_Results/CalculateTorqueLimits/model_standards_results
+            PA_Results/FluxWeakeningControl/model_standards_results
+            PA_Results/RsCalculation/model_standards_results
+            PA_Results/TractionEmotorRequirements/report
+            PA_Results/test_results
+            derived/artifacts.dmr
+          retention-days: 30
 
       - name: Save Cache
         uses: actions/cache@v4
@@ -219,7 +197,7 @@ jobs:
           restore-keys: |
             padv_artifacts-${{ runner.os }}-${{ github.ref_name }}
             padv_artifacts-${{ runner.os }}-
-            adv_artifacts-
+            padv_artifacts-
           path: |
             AutoCodeGen
             PA_Results/CalculateFeedforwardVoltages/model_standards_results
@@ -231,4 +209,3 @@ jobs:
             PA_Results/TractionEmotorRequirements/report
             PA_Results/test_results
             derived/artifacts.dmr
-
