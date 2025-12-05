@@ -10,10 +10,10 @@ function processmodel(pm)
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     includeGenerateRequirementsReport = true;
     includeModelStandardsTask = true;
-    includeTestsPerTestCaseTask = false;
-    includeTestsPerModel = false;
-    includeGenerateCodeTask = false;
-    includeMergeTestResultsTask = false;
+    includeTestsPerTestCaseTask = true;
+    includeTestsPerModel = true;
+    includeGenerateCodeTask = true;
+    includeMergeTestResultsTask = true;
   
   
     includeSDDTask = false;

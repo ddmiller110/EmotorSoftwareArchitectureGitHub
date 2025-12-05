@@ -23,7 +23,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      # Restore the cache once here
+      # Restore the cache (if it exists)
       - name: Restore Cache
         uses: actions/cache@v4
         with:
@@ -33,6 +33,11 @@ jobs:
             PA_Results
             derived/artifacts.dmr
             AutoCodeGen
+
+      # FIX: Ensure directories exist so artifact creation never fails
+      # If cache restored them, this does nothing. If cache missed, this creates empty folders.
+      - name: Ensure Artifact Directories Exist
+        run: mkdir -p PA_Results derived AutoCodeGen
 
       # Upload this state so parallel jobs can download it
       - name: Upload Base State Artifact
@@ -44,6 +49,8 @@ jobs:
             derived
             AutoCodeGen
           retention-days: 1
+          if-no-files-found: warn
+
 
   # =====================================================
   # 2. PARALLEL TASKS (Must download Base State first)

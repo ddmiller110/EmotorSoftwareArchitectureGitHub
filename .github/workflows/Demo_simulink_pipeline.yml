@@ -1,4 +1,4 @@
-name: simulink_pipeline
+name: Demo_simulink_pipeline
 
 on:
   push:
@@ -14,7 +14,7 @@ jobs:
   # COMBINED JOB: RESTORE & RUN
   # ---------------------------------------------------------
   run_process:
-    name: Run MATLAB CI Pipeline
+    name: Run Simulink CI Pipeline
     runs-on: ubuntu-latest
 
     env:
@@ -29,7 +29,7 @@ jobs:
       # ---------------------------------------------------------
       # This restores files if they exist. If not, the job continues smoothly
       # and will save the cache at the end of this job automatically.
-      - name: Restore MATLAB build artifacts from cache
+      - name: Restore Simulink build artifacts from cache
         uses: actions/cache@v4
         with:
           key: padv_artifacts-${{ github.run_id }}-${{ github.run_attempt }}
@@ -75,7 +75,7 @@ jobs:
       # ---------------------------------------------------------
       # 3. RUN PROCESS
       # ---------------------------------------------------------
-      - name: Run MATLAB CI process
+      - name: Run Simulink CI process
         uses: matlab-actions/run-command@v2
         with:
           command: |
