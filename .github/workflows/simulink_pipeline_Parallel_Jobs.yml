@@ -10,7 +10,8 @@ permissions:
   checks: write
 
 env:
-  PATH_TO_MATLAB: /opt/matlab/R2025b
+  # Global License Token (available to all jobs)
+  MLM_LICENSE_TOKEN: ${{ secrets.MATLAB_BATCH_TOKEN }}
 
 jobs:
   # =====================================================
@@ -58,9 +59,6 @@ jobs:
   Task1_GenerateRequirementsReport:
     runs-on: ubuntu-latest
     needs: Restore_Cache
-    env:
-      MLM_LICENSE_TOKEN: ${{ secrets.MATLAB_BATCH_TOKEN }}
-
     steps:
       - uses: actions/checkout@v4
 
@@ -112,9 +110,6 @@ jobs:
   Task2_CheckModelingStandards:
     runs-on: ubuntu-latest
     needs: Restore_Cache
-    env:
-      MLM_LICENSE_TOKEN: ${{ secrets.MATLAB_BATCH_TOKEN }}
-
     steps:
       - uses: actions/checkout@v4
 
@@ -170,9 +165,6 @@ jobs:
   Task3_RunTests:
     runs-on: ubuntu-latest
     needs: Restore_Cache
-    env:
-      MLM_LICENSE_TOKEN: ${{ secrets.MATLAB_BATCH_TOKEN }}
-
     steps:
       - uses: actions/checkout@v4
 
@@ -224,9 +216,6 @@ jobs:
   Task4_GenerateCode:
     runs-on: ubuntu-latest
     needs: Restore_Cache
-    env:
-      MLM_LICENSE_TOKEN: ${{ secrets.MATLAB_BATCH_TOKEN }}
-
     steps:
       - uses: actions/checkout@v4
 
@@ -282,12 +271,8 @@ jobs:
       - Task2_CheckModelingStandards
       - Task3_RunTests
       - Task4_GenerateCode
-    env:
-      MLM_LICENSE_TOKEN: ${{ secrets.MATLAB_BATCH_TOKEN }}
-
     steps:
       - uses: actions/checkout@v4
-
       - name: Setup MATLAB
         uses: matlab-actions/setup-matlab@v2
         with:
