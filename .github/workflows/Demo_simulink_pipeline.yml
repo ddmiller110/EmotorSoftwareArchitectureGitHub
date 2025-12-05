@@ -1,14 +1,13 @@
 
 name: simulink_pipeline
 
-on:
+"on":
   push:
     branches: [ master ]  # change to [ main ] if your repo's default branch is main
 
 permissions:
   checks: write
   contents: read
-
 
 jobs:
   Restore_Cache:
@@ -17,7 +16,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      # Add diagnostics here
+      # First-run safety: ensure expected dirs/files exist so artifacts & cache are created
       - name: Ensure expected directories exist
         run: |
           mkdir -p AutoCodeGen
@@ -31,6 +30,7 @@ jobs:
           mkdir -p PA_Results/test_results
           : > derived/artifacts.dmr
 
+      # Diagnostics: confirm what will be uploaded (helps when artifacts appear "missing")
       - name: List files before uploading restore artifact
         run: |
           echo "Workspace: $GITHUB_WORKSPACE"
@@ -71,6 +71,7 @@ jobs:
             PA_Results/test_results
             derived/artifacts.dmr
 
+      # Upload the "restore" artifact; v4 excludes hidden files by default—opt back in
       - name: Upload artifacts from restore
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v4
@@ -87,6 +88,8 @@ jobs:
             PA_Results/TractionEmotorRequirements/report
             PA_Results/test_results
             derived/artifacts.dmr
+          include-hidden-files: true          # v4 excludes hidden paths by default
+          if-no-files-found: warn             # tolerate empty paths on first run
           retention-days: 30
 
   Runprocess:
@@ -99,6 +102,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
+      # Optional on first run; continue even if the artifact doesn't exist yet
       - name: Download restore artifact
         uses: actions/download-artifact@v4
         continue-on-error: true
@@ -153,6 +157,8 @@ jobs:
             PA_Results/TractionEmotorRequirements/report
             PA_Results/test_results
             derived/artifacts.dmr
+          include-hidden-files: true
+          if-no-files-found: warn
           retention-days: 30
 
   Collect_Artifacts:
@@ -172,6 +178,7 @@ jobs:
         with:
           name: runprocess_artifacts
 
+      # Optional: re-upload a combined artifact for convenience
       - name: Upload combined artifacts
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v4
@@ -185,27 +192,3 @@ jobs:
             PA_Results/CalculateTorqueLimits/model_standards_results
             PA_Results/FluxWeakeningControl/model_standards_results
             PA_Results/RsCalculation/model_standards_results
-            PA_Results/TractionEmotorRequirements/report
-            PA_Results/test_results
-            derived/artifacts.dmr
-          retention-days: 30
-
-      - name: Save Cache
-        uses: actions/cache@v4
-        with:
-          key: padv_artifacts-${{ runner.os }}-${{ github.ref_name }}-${{ github.sha }}
-          restore-keys: |
-            padv_artifacts-${{ runner.os }}-${{ github.ref_name }}
-            padv_artifacts-${{ runner.os }}-
-            padv_artifacts-
-          path: |
-            AutoCodeGen
-            PA_Results/CalculateFeedforwardVoltages/model_standards_results
-            PA_Results/CalculateMaximumFluxLimit/model_standards_results
-            PA_Results/CalculateOptimalFlux/model_standards_results
-            PA_Results/CalculateTorqueLimits/model_standards_results
-            PA_Results/FluxWeakeningControl/model_standards_results
-            PA_Results/RsCalculation/model_standards_results
-            PA_Results/TractionEmotorRequirements/report
-            PA_Results/test_results
-            derived/artifacts.dmr
