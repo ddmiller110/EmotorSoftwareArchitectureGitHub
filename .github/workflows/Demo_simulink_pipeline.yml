@@ -38,11 +38,14 @@ jobs:
 
         with:
           key:
-            padv_artifacts-${{ github.run_id }}-${{ github.run_attempt }}
+            padv_artifacts-${{ runner.os }}-${{ github.ref_name }}
 
           restore-keys: |
+            padv_artifacts-${{ runner.os }}-
             padv_artifacts-
+
           path: |
+            derived/artifacts.dmr
             AutoCodeGen
             PA_Results/CalculateFeedforwardVoltages/model_standards_results
             PA_Results/CalculateMaximumFluxLimit/model_standards_results
@@ -52,7 +55,7 @@ jobs:
             PA_Results/RsCalculation/model_standards_results
             PA_Results/TractionEmotorRequirements/report
             PA_Results/test_results
-            derived/artifacts.dmr
+
 
 
       - name:
@@ -107,13 +110,13 @@ jobs:
 
       - name:
           Download Artifacts
-
+        continue-on-error: true
         uses:
           actions/download-artifact@v4
-        continue-on-error: true
+        
         with:
           name:
-            Restore_Cache_padv_artifacts
+            restore_cache_artifacts
 
 
       - name:
@@ -166,8 +169,7 @@ jobs:
           name:
             Runprocess_padv_artifacts
 
-          path:
-            |
+          path: |
             derived/artifacts.dmr
             AutoCodeGen
             PA_Results/CalculateFeedforwardVoltages/model_standards_results
@@ -196,16 +198,37 @@ jobs:
     steps:
       - name:
           Download Artifacts
-
+      
         uses:
           actions/download-artifact@v4
-
+        continue-on-error: true
         with:
-          name:
-            Restore_Cache_padv_artifacts
-
-
+          name: restore_cache_artifacts 
  
+      - name: Download runprocess artifact
+        uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          name: runprocess_artifacts
 
 
+      - name: Save Cache
+        uses: actions/cache@v4
+        with:
+          key: padv_artifacts-${{ runner.os }}-${{ github.ref_name }}-${{ github.sha }}
+          restore-keys: |
+            padv_artifacts-${{ runner.os }}-${{ github.ref_name }}
+            padv_artifacts-${{ runner.os }}-
+            adv_artifacts-
+          path: |
+            AutoCodeGen
+            PA_Results/CalculateFeedforwardVoltages/model_standards_results
+            PA_Results/CalculateMaximumFluxLimit/model_standards_results
+            PA_Results/CalculateOptimalFlux/model_standards_results
+            PA_Results/CalculateTorqueLimits/model_standards_results
+            PA_Results/FluxWeakeningControl/model_standards_results
+            PA_Results/RsCalculation/model_standards_results
+            PA_Results/TractionEmotorRequirements/report
+            PA_Results/test_results
+            derived/artifacts.dmr
 
