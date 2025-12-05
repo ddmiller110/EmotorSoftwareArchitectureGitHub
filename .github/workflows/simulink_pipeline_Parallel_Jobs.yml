@@ -76,7 +76,7 @@ jobs:
             Simulink
             Requirements_Toolbox
             Simulink_Report_Generator
-            # (Add other necessary toolboxes for this specific task)
+          
           release: R2025b
           cache: true
       - name: Run Task 1
@@ -105,7 +105,10 @@ jobs:
       - name: Setup MATLAB
         uses: matlab-actions/setup-matlab@v2
         with:
-          products: Simulink Simulink_Check Stateflow
+          products: |
+            Simulink 
+            Simulink_Check 
+            CI/CD_Automation_for_Simulink_Check
           release: R2025b
           cache: true
       - name: Run Task 2
@@ -139,7 +142,22 @@ jobs:
       - name: Setup MATLAB
         uses: matlab-actions/setup-matlab@v2
         with:
-          products: Simulink Simulink_Test Simulink_Coverage
+          products: |
+            Simulink
+            Stateflow
+            Simulink_Test
+            Simulink_Coverage
+            Simulink_Check
+            Requirements_Toolbox
+            CI/CD_Automation_for_Simulink_Check
+            MATLAB_Coder
+            Simulink_Coder
+            Embedded_Coder
+            System_Composer
+            Simulink_Design_Verifier
+            Powertrain_Blockset
+            Simulink_Report_Generator
+            Simulink_Control_Design
           release: R2025b
           cache: true
       - name: Run Task 3
@@ -167,7 +185,10 @@ jobs:
       - name: Setup MATLAB
         uses: matlab-actions/setup-matlab@v2
         with:
-          products: MATLAB_Coder Simulink_Coder Embedded_Coder
+          products: |
+            MATLAB_Coder 
+            Simulink_Coder 
+            Embedded_Coder
           release: R2025b
           cache: true
       - name: Run Task 4
