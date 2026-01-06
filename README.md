@@ -4,8 +4,7 @@
 
 ## Overview
 
-This workflow example, built on System Composer, reconstructs an EV traction e-motor control software architecture from a complex Visio diagram. Serving as a single source of truth, the software architecture model provides the foundation for requirements tracing, component design, interface definition, system analysis, and functional (behavioral) model testing. The example also demonstrates key capabilities from Requirements Toolbox, System Composer, Simulink Test, and CI/CD automation with Simulink Check. Through this demonstration, engineers will learn how to establish a consistent digital thread across the entire motor control software development process.
-
+This workflow example, built on System Composer, reconstructs an EV traction e-motor control software architecture from a complex Visio diagram. Serving as a single source of truth, the software architecture model provides the foundation for requirements tracing, component design, interface definition, system analysis, and functional (behavioral) model testing. The example also demonstrates key capabilities from Simulink Test and CI/CD automation with Simulink Check. Through this demonstration, engineers will learn how to establish a consistent digital thread across the entire motor control software development process.
 ## Highlights
 - Tracing requirements from architecture to model, test, and code
 - Capturing component meta-data using stereotypes
