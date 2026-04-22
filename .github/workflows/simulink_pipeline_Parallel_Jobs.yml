@@ -81,7 +81,7 @@ jobs:
             Powertrain_Blockset
             Simulink_Report_Generator
             Simulink_Control_Design
-          release: R2025b
+          release: R2026a
           cache: true
 
       - name: Run Task 1
