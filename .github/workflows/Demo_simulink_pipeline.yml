@@ -22,7 +22,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       # ---------------------------------------------------------
       # 1. RESTORE CACHE DIRECTLY HERE
@@ -30,7 +30,7 @@ jobs:
       # This restores files if they exist. If not, the job continues smoothly
       # and will save the cache at the end of this job automatically.
       - name: Restore Simulink build artifacts from cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           key: padv_artifacts-${{ github.run_id }}-${{ github.run_attempt }}
           restore-keys: |
@@ -51,7 +51,7 @@ jobs:
       # 2. SETUP MATLAB
       # ---------------------------------------------------------
       - name: Setup MATLAB
-        uses: matlab-actions/setup-matlab@v2
+        uses: matlab-actions/setup-matlab@v3
         with:
           release: R2026a
           cache: true
@@ -76,7 +76,7 @@ jobs:
       # 3. RUN PROCESS
       # ---------------------------------------------------------
       - name: Run Simulink CI process
-        uses: matlab-actions/run-command@v2
+        uses: matlab-actions/run-command@v3
         with:
           command: |
             openProject(pwd);
@@ -93,7 +93,7 @@ jobs:
       # ---------------------------------------------------------
       - name: Upload CI output artifacts
         if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: runprocess_artifacts
           retention-days: 30
