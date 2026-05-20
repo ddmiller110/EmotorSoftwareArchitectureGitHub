@@ -22,7 +22,7 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Restore Cache
         uses: actions/cache@v5
@@ -40,7 +40,7 @@ jobs:
 
       - name: Upload Artifacts
         if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: 01_Restore_Cache_padv_artifacts
           path: |
@@ -97,7 +97,7 @@ jobs:
 
       - name: Upload Task 1 Artifacts
         if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: Task1_RequirementsReport
           path: |
@@ -148,7 +148,7 @@ jobs:
 
       - name: Upload Task 2 Artifacts
         if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: Task2_ModelStandards
           path: |
@@ -203,7 +203,7 @@ jobs:
 
       - name: Upload Task 3 Artifacts
         if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: Task3_TestResults
           path: |
@@ -254,7 +254,7 @@ jobs:
 
       - name: Upload Task 4 Artifacts
         if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: Task4_GeneratedCode
           path: |
@@ -308,7 +308,7 @@ jobs:
 
       - name: Upload Task 5 Artifacts
         if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: Task5_MergedResults
           path: |
