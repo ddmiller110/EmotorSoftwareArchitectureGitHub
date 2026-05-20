@@ -51,6 +51,7 @@ jobs:
             PA_Results/FluxWeakeningControl/model_standards_results
             PA_Results/RsCalculation/model_standards_results
             derived/artifacts.dmr
+          if-no-files-found: ignore   # ← was the implicit default 'warn'
           retention-days: 90
 
   # =====================================================
