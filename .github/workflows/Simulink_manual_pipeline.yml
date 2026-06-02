@@ -1,0 +1,78 @@
+name: Simulink_manual_pipeline
+# TRIGGER CONDITIONS (on:)
+# Defines the GitHub events that will automatically start this workflow.
+on:
+  push:
+    # The workflow runs whenever code is pushed to the 'master' branch.
+    branches: [master]
+  # Allow manual triggers from the GitHub Actions UI ("Run workflow" button).
+  workflow_dispatch:
+
+permissions:
+  # Allows the workflow to check out (read) repository files.
+  contents: read
+
+env:
+  # MLM_LICENSE_TOKEN is the MathWorks batch licensing token required to
+  # activate MATLAB on GitHub-hosted runners (which have no license server).
+  MLM_LICENSE_TOKEN: ${{ secrets.MATLAB_BATCH_TOKEN }}
+
+# =============================================================================
+# JOBS
+# Each job runs independently in its own runner environment (a fresh VM).
+# Jobs can run in parallel or be sequenced using the 'needs:' keyword.
+# =============================================================================
+jobs:
+  # ===========================================================================
+  # JOB 1 — Generate C Code for Simulink Behavior Models
+  # ===========================================================================
+  Task1_GenerateCode:
+    # 'ubuntu-latest' uses the most recent stable Ubuntu image available on
+    # GitHub-hosted runners. It is free for public repos and counts against
+    # minutes for private repos.
+    runs-on: ubuntu-latest
+
+    steps:
+      # The 'actions/checkout' action clones the repository into the runner's
+      # workspace so subsequent steps can access source files.
+      - uses: actions/checkout@v6
+
+      # The 'matlab-actions/setup-matlab' action installs MATLAB and the
+      # specified toolboxes on the runner.
+      - name: Setup MATLAB
+        uses: matlab-actions/setup-matlab@v3
+        with:
+          products: |
+            Simulink
+            Stateflow
+            Simulink_Test
+            Simulink_Coverage
+            Simulink_Check
+            Requirements_Toolbox
+            MATLAB_Coder
+            Simulink_Coder
+            Embedded_Coder
+            System_Composer
+            Simulink_Design_Verifier
+            Powertrain_Blockset
+            Simulink_Report_Generator
+            Simulink_Control_Design
+          release: R2026a
+          # 'cache: true': Caches the MATLAB installation between runs so the
+          # installer doesn't re-download gigabytes of toolboxes every time.
+          cache: true
+
+      - name: Run Task 1
+        uses: matlab-actions/run-command@v3
+        with:
+          command: |
+            openProject(pwd);
+            Codegen_CI;
+          # calls the script to execute codegen for all behavior models in this project.
+
+      - name: Upload Code Generation Artifacts
+        uses: actions/upload-artifact@v6
+        with:
+          name: Task1_GenerateCode
+          path: |
+            AutoCodeGen
