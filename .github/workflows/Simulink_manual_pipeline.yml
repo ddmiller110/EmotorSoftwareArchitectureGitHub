@@ -77,13 +77,13 @@ jobs:
           path: Tests/results.xml
 
       - name: Publish Test Results
-        uses: dorny/test-reporter@v1
+        uses: dorny/test-reporter@v2
         if: ${{ !cancelled() }}
         with:
-          name: Simulink Test Results
+          name: Test Results
           path: Tests/results.xml
           reporter: java-junit
-          
+
   #==================================================
   # Task 2 — Generate Code for Simulink Behavior Models
   # ===========================================================================
