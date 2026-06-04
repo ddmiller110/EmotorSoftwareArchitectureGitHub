@@ -1,29 +1,32 @@
+function RunTests_CI()
 % Run all Simulink Test cases in the project and export JUnit XML Results
+openProject(pwd);
 
-proj = openProject(pwd);
-
-% Find all test files in the project
-testFiles = proj.Files(arrayfun(@(f) endsWith(f.Path, '.mldatx'), proj.Files));
-
-% Create a test runner with JUnit plugin for CI reporting
-import matlab.unittest.TestSuite
 import matlab.unittest.TestRunner
 import matlab.unittest.plugins.XMLPlugin
+import sltest.plugins.TestManagerResultsPlugin
 
-%JUnit XML is just a universally agreed-upon way to write test results to a file —
-% MATLAB writes it, GitHub reads it, and your test pass/fail status shows up on 
-% every commit automatically.
+% Path to your existing test file
+testFile = fullfile(pwd, 'Tests', 'exampleTest.mldatx');
 
+% Load existing TestSuite1 from exampleTest.mldatx
+suite = testsuite(testFile);
+
+% Output path for JUnit XML — reusing the Tests folder
+xmlFile = fullfile(pwd, 'Tests', 'results.xml');
+
+% Build runner with JUnit XML and Simulink Test plugins
 runner = TestRunner.withNoPlugins;
-xmlFile = fullfile(pwd, 'test_results', 'results.xml');
 runner.addPlugin(XMLPlugin.producingJUnitFormat(xmlFile));
+runner.addPlugin(TestManagerResultsPlugin);   % results go back to exampleTest.mldatx
 
-% Run tests via Simulink Test
-sltest.testmanager.load(testFiles(1).Path);
-results = sltest.testmanager.run;
-sltest.testmanager.exportResults(results, xmlFile);
+% Run the suite
+results = runner.run(suite);
 
-% Fail the script (and therefore the CI job) if any tests failed
-if any(~[results.Passed])
-    error('One or more tests failed. See results.xml for details.');
+% Fail the CI job if any tests failed
+numFailed = nnz([results.Failed]);
+if numFailed > 0
+    error('RunTests_CI:testsFailed', ...
+        '%d test(s) failed. See Tests/results.xml for details.', ...
+        numFailed);
 end

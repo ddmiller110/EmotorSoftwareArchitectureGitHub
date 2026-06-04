@@ -1,4 +1,4 @@
-function Codegen_CI()
+function GenerateCode_CI()
 % This script is to automate the codeGeneration of models contained in this project
 
 % List names of all models for which code is being generated
