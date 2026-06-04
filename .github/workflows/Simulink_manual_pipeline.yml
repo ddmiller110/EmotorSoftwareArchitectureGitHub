@@ -36,7 +36,7 @@ jobs:
     steps:
       # The 'actions/checkout' action clones the repository into the runner's
       # workspace so subsequent steps can access source files.
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       # The 'matlab-actions/setup-matlab' action installs MATLAB and the
       # specified toolboxes on the runner.
@@ -70,10 +70,10 @@ jobs:
 
       - name: Upload Test Results
         if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: TestResults
-          path: test_results/results.xml
+          path: Tests/results.xml
 
   # ===========================================================================
   # Task 2 — Generate Code for Simulink Behavior Models
@@ -85,7 +85,7 @@ jobs:
     needs: Task1_RunTests
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Setup MATLAB
         uses: matlab-actions/setup-matlab@v3
@@ -108,7 +108,7 @@ jobs:
 
       - name: Upload Generated Code
         if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: GeneratedCode
           path: AutoCodeGen/
