@@ -67,7 +67,7 @@ jobs:
         with:
           command: |
             openProject(pwd);
-            Codegen_CI;
+            GenerateCode_CI;
           # calls the script to execute codegen for all behavior models in this project.
 
       - name: Upload Code Generation Artifacts
