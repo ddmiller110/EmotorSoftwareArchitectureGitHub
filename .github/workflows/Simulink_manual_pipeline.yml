@@ -11,6 +11,7 @@ on:
 permissions:
   # Allows the workflow to check out (read) repository files.
   contents: read
+  checks: write # ← needed for visual test reporting
 
 env:
   # MLM_LICENSE_TOKEN is the MathWorks batch licensing token required to
@@ -75,7 +76,15 @@ jobs:
           name: TestResults
           path: Tests/results.xml
 
-  # ===========================================================================
+      - name: Publish Test Results
+        uses: dorny/test-reporter@v1
+        if: ${{ !cancelled() }}
+        with:
+          name: Simulink Test Results
+          path: Tests/results.xml
+          reporter: java-junit
+          
+  #==================================================
   # Task 2 — Generate Code for Simulink Behavior Models
   # ===========================================================================
   Task2_GenerateCode:
