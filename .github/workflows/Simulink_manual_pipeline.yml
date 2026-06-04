@@ -17,7 +17,8 @@ env:
   # MLM_LICENSE_TOKEN is the MathWorks batch licensing token required to
   # activate MATLAB on GitHub-hosted runners (which have no license server).
   MLM_LICENSE_TOKEN: ${{ secrets.MATLAB_BATCH_TOKEN }}
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true  #force Node.js 24 now with an environment variable
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true  
+  #force Node.js 24 now with an environment variable
 # =============================================================================
 # JOBS
 # Each job runs independently in its own runner environment (a fresh VM).
