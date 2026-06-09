@@ -1,4 +1,4 @@
-name: Simulink_manual_pipeline
+name: Simulink_pipeline
 
 on:
   push:
