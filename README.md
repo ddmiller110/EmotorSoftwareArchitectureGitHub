@@ -1,5 +1,6 @@
 # Traction e-Motor Control Software Architecture - The Story of a Digital Thread
 *Built using MATLAB R2026a, Copyright 2026 The MathWorks, Inc.*  
+<img width="1008" height="604" alt="EMotorSoftwareArchitecture" src="https://github.com/user-attachments/assets/49592399-bd14-4f8a-8271-52c573c48a63" />
 
 
 ## Overview
