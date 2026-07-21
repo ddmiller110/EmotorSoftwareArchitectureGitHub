@@ -5,7 +5,7 @@
 
 ## Overview
 
-A key challenge in the automotive industry is developing subsystem control software while maintaining continuity across the entire development process. From early requirements through model development and testing phases, valuable information is often lost during handoffs between different teams or tools. Using an example of developing traction e-motor control application software, this talk demonstrates how creating a single, integrated digital thread can help eliminate those information gaps, ensuring consistent data flow and traceability throughout the development lifecycle.
+A key challenge in the automotive industry is developing subsystem control software while maintaining continuity across the entire development process. From early requirements through model development and testing phases, valuable information is often lost during handoffs between different teams or tools. Using an example of developing traction e-motor control application software, this project demonstrates how creating a single, integrated digital thread can help eliminate those information gaps, ensuring consistent data flow and traceability throughout the development lifecycle.
 This workflow example is built on System Composer™. It reconstructs an EV traction e-motor control software architecture from a complex Visio diagram. The software architecture model serves as a single source of truth for requirements tracing, component design, interface definition, system analysis, and functional (behavioral) model testing. The example also demonstrates key capabilities from Simulink Test™ and CI/CD automation with Simulink Check™. Through this demonstration, engineers will learn how to establish a consistent digital thread across the entire application software development process.
 
 ## Highlights
@@ -22,7 +22,7 @@ Clone the repository:
 - In MATLAB, right-click in the Files or Project panel.
 - Select Source Control > Clone Git Repository.
 
-## Relevant Products (Release R2025b and later)
+## Relevant Products (Release R2026a and later)
 
 - MATLAB&reg;
 - Simulink&reg;
