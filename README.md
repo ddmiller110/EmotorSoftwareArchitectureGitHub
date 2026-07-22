@@ -1,5 +1,8 @@
 # Traction e-Motor Control Software Architecture - The Story of a Digital Thread
 *Built using MATLAB R2026a, Copyright 2026 The MathWorks, Inc.*  
+
+[![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/dhu110/traction-emotor-control-software-architecture/MotorControlSoftwareArch.prj) 
+
 <img width="1008" height="604" alt="EMotorSoftwareArchitecture" src="https://github.com/user-attachments/assets/49592399-bd14-4f8a-8271-52c573c48a63" />
 
 
@@ -30,9 +33,9 @@ Clone the repository:
 - Requirements Toolbox&trade;
 - Simulink&reg; Test&trade;
 - Simulink&reg; Check&trade;
-- MATLAB&reg; Coder&reg;
-- Simulink&reg; Coder&reg;
-- Embedded Coder&reg;
+- MATLAB&reg; Coder&trade;
+- Simulink&reg; Coder&trade;
+- Embedded Coder&trade;
 - Powertrain Blockset&trade;(for running test harnesses)
 - CI/CD Automation for Simulink Check (as support package)
 
