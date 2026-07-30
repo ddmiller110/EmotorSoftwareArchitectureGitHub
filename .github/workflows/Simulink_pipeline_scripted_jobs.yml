@@ -1,4 +1,4 @@
-name: Simulink_pipeline
+name: Simulink Pipeline Scripted Jobs
 
 on:
   push:

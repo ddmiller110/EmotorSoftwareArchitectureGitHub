@@ -1,4 +1,4 @@
-name: Demo_simulink_pipeline
+name: Process Advisor Simulink Pipeline
 
 on:
   push:
